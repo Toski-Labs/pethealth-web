@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pethealth.toski-labs.com.br/sitemap-index.xml
