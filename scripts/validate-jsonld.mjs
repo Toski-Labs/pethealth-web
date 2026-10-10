@@ -34,7 +34,7 @@ for (const p of await loadPages()) {
     }
     if (n['@type'] === 'FAQPage') {
       const q = n.mainEntity ?? [];
-      const onPage = p.root.querySelectorAll('main details > summary').map((s) => s.text.trim());
+      const onPage = p.root.querySelectorAll('section[aria-labelledby="faq-titulo"] details > summary').map((s) => s.text.trim());
       if (q.length === 0 || q.length !== onPage.length) errors.push(`${w}: ${q.length} perguntas no JSON-LD e ${onPage.length} na página`);
       q.forEach((x, i) => { if (x.name !== onPage[i]) errors.push(`${w}: pergunta ${i + 1} diferente da página`); if (!x.acceptedAnswer?.text) errors.push(`${w}: pergunta ${i + 1} sem resposta`); });
     }

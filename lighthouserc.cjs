@@ -4,7 +4,7 @@
 // (errors-in-console, por causa do próprio status). Nela valem desempenho e acessibilidade.
 const profile = process.env.LH_PROFILE || 'mobile-light';
 const [form, theme] = profile.split('-');
-const port = 4324;
+const port = Number(process.env.LH_PORT || 4324); // scripts/lighthouse.mjs escolhe uma porta livre
 const base = `http://127.0.0.1:${port}`;
 const urls = ['/', '/en', '/privacidade', '/en/privacy', '/suporte', '/en/support', '/404'];
 const full = ['performance', 'accessibility', 'best-practices', 'seo'];

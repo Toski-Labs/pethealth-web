@@ -17,6 +17,9 @@ const t = {
     mailBodyEnd: 'Respondemos em até 2 dias úteis.',
     mailCta: 'Escrever e-mail',
     mailSubject: 'Suporte PetHealthTracker',
+    copyMail: 'Copiar e-mail',
+    copiedMail: 'E-mail copiado',
+    newTab: '(abre em nova aba)',
     mailWeb: 'no navegador',
     mailApp: 'App de e-mail',
     mailAppHint: 'Mail ou o app do seu aparelho',
@@ -39,6 +42,9 @@ const t = {
     mailBodyEnd: 'We reply within 2 business days.',
     mailCta: 'Send an email',
     mailSubject: 'PetHealthTracker support',
+    copyMail: 'Copy email',
+    copiedMail: 'Email copied',
+    newTab: '(opens in a new tab)',
     mailWeb: 'in your browser',
     mailApp: 'Email app',
     mailAppHint: 'Mail or your device’s app',
@@ -70,7 +76,7 @@ const outlook = `https://outlook.live.com/mail/0/deeplink/compose?to=${SUPPORT_E
     <p class="text-base leading-normal text-muted">{t.mailBody} <strong class="font-semibold text-ink select-all">{SUPPORT_EMAIL}</strong>. {t.mailBodyEnd}</p>
     <div class="mt-1.5 flex flex-wrap gap-2.5">
       <!-- <details> nativo: abre e fecha sem JavaScript. -->
-      <details class="group relative max-sm:flex-auto">
+      <details class="toski-mail group relative max-sm:flex-auto">
         <summary class={buttonClasses('primary', 'md', 'w-full cursor-pointer list-none [&::-webkit-details-marker]:hidden')}>
           {t.mailCta}<Icon name="chevron-down" size={18} stroke={2.2} className="transition-transform group-open:rotate-180" />
         </summary>
@@ -84,17 +90,29 @@ const outlook = `https://outlook.live.com/mail/0/deeplink/compose?to=${SUPPORT_E
               <a
                 href={o.href}
                 target={o.external ? '_blank' : undefined}
-                rel={o.external ? 'noopener' : undefined}
+                rel={o.external ? 'noopener noreferrer' : undefined}
                 class="flex min-h-11 flex-col justify-center rounded-[10px] px-3 py-1.5 leading-tight text-ink no-underline hover:bg-tint hover:text-ink"
               >
                 <span class="text-[15px] font-semibold">{o.label}</span>
                 <span class="text-xs text-muted">{o.hint}</span>
+                {o.external && <span class="sr-only"> {t.newTab}</span>}
               </a>
             </li>
           ))}
         </ul>
       </details>
+      <!-- Só aparece com JavaScript e com a API de área de transferência; sem ela, o e-mail acima segue visível para selecionar. -->
+      <button
+        type="button"
+        hidden
+        data-copy={SUPPORT_EMAIL}
+        data-copied={t.copiedMail}
+        class={buttonClasses('secondary', 'md', 'toski-copy max-sm:flex-auto max-sm:justify-center')}
+      >
+        <span data-text>{t.copyMail}</span>
+      </button>
     </div>
+    <p class="sr-only" aria-live="polite" data-copy-status></p>
   </Card>
   <Card variant="hero" radius="panel" className="flex min-w-0 flex-[1_1_340px] flex-col gap-3.5 p-8">
     <IconBox name="copy" on="surface" />
@@ -125,3 +143,48 @@ const outlook = `https://outlook.live.com/mail/0/deeplink/compose?to=${SUPPORT_E
   <p class="text-[17px] text-muted">{t.privLine}</p>
   <a href={href(lang, 'privacy')} class="inline-flex min-h-11 items-center text-base font-semibold no-underline hover:underline">{t.privCta}</a>
 </section>
+
+<script>
+  // Copiar e-mail: o botão só aparece se o navegador tiver a API de área de transferência. Ao copiar, o texto do
+  // botão e um aviso em aria-live (leitor de tela) dizem "E-mail copiado". O menu do e-mail fecha ao escolher uma opção.
+  const button = document.querySelector<HTMLButtonElement>('[data-copy]');
+  const status = document.querySelector<HTMLElement>('[data-copy-status]');
+  if (button && status && navigator.clipboard?.writeText) {
+    const label = button.querySelector<HTMLElement>('[data-text]')!;
+    const idle = label.textContent ?? '';
+    const copied = button.dataset.copied ?? '';
+    let timer: number | undefined;
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy ?? '');
+      } catch {
+        return; // sem permissão: o e-mail segue visível para selecionar
+      }
+      label.textContent = copied;
+      status.textContent = copied;
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        label.textContent = idle;
+        status.textContent = '';
+      }, 2500);
+    });
+  }
+
+  const menu = document.querySelector<HTMLDetailsElement>('.toski-mail');
+  if (menu) {
+    const close = () => {
+      menu.open = false;
+    };
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+    document.addEventListener('click', (e) => {
+      if (menu.open && !menu.contains(e.target as Node)) close();
+    });
+    menu.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.open) {
+        close();
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>
