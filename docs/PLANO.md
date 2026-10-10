@@ -51,3 +51,8 @@ Leva 1 (`feat/site-v1`) pronta para PR (10 out 2026: menu e "Copiar e-mail" do S
 - Validação online, manual: Rich Results Test e validator.schema.org (`MobileApplication` sem `offers` não vira rich result; o FAQ só aparece no Google para sites oficiais e de saúde, mas o marcado é válido).
 - Google Search Console: verificação pelo DNS, depois do deploy.
 - Site da Toski (leva separada): card do projeto apontando para o subdomínio e 301 de `/pethealthtracker`.
+
+## CI (GitHub Actions)
+- `.github/workflows/ci.yml` roda `npm run ci` em PR, em `ubuntu-24.04` (fixo; o `ubuntu-latest` vira Ubuntu 26 em 19/out), com `actions/checkout@v7` e `actions/setup-node@v7` (Node 24).
+- O Ubuntu do runner bloqueia o sandbox do Chrome ("No usable sandbox!"), e o Lighthouse CI abre o Chrome pelo Puppeteer nos perfis escuros (ignora `chromeFlags`). O workflow libera o sandbox com `sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0`; não usamos `--no-sandbox`.
+- Lighthouse: 3 rodadas por página, com a mediana nas asserções (limites em 100).

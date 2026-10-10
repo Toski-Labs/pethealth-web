@@ -13,21 +13,21 @@ module.exports = {
   ci: {
     collect: {
       url: urls.map((u) => base + u),
-      numberOfRuns: 1,
+      numberOfRuns: 3, // a mediana das 3 vale: uma rodada lenta não derruba o CI
       startServerCommand: `node scripts/serve.mjs ${port}`,
       startServerReadyPattern: 'dist/ em',
       puppeteerScript: theme === 'dark' ? './lighthouse-dark.cjs' : undefined,
+      // Sem chromeFlags: o sandbox do Chrome fica ligado (no GitHub Actions, o workflow libera o sandbox do Ubuntu).
+      // Com puppeteerScript o LHCI abre o Chrome pelo Puppeteer e ignora chromeFlags: flags de verdade iriam em
+      // puppeteerLaunchOptions.args.
       settings: {
         preset: form === 'desktop' ? 'desktop' : undefined,
-        chromeFlags: '--no-sandbox',
-        // O 404 volta com status 404 de propósito.
-        skipAudits: [],
       },
     },
     assert: {
       assertMatrix: [
-        { matchingUrlPattern: '.*/404$', assertions: Object.fromEntries(full.slice(0, 2).map((c) => [`categories:${c}`, ['error', { minScore: 1 }]])) },
-        { matchingUrlPattern: '^(?!.*/404$).*$', assertions: Object.fromEntries(full.map((c) => [`categories:${c}`, ['error', { minScore: 1 }]])) },
+        { matchingUrlPattern: '.*/404$', assertions: Object.fromEntries(full.slice(0, 2).map((c) => [`categories:${c}`, ['error', { minScore: 1, aggregationMethod: 'median' }]])) },
+        { matchingUrlPattern: '^(?!.*/404$).*$', assertions: Object.fromEntries(full.map((c) => [`categories:${c}`, ['error', { minScore: 1, aggregationMethod: 'median' }]])) },
       ],
     },
     upload: { target: 'filesystem', outputDir: `.lighthouseci/${profile}` },
