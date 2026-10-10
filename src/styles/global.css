@@ -1,0 +1,156 @@
+@import "tailwindcss";
+@import "@fontsource-variable/outfit";
+
+/*
+  Toski DS (@toski-labs/ds): variáveis --toski-* (claro/escuro e data-theme), @theme com as classes
+  (bg-surface, text-muted, rounded-card…), utilitário `page` e estilos de base.
+  Tema do produto: <html data-product="pethealth"> troca só o destaque (Índigo/lilás) e o hero.
+  https://toski-labs.github.io/toski-ds/
+*/
+@import "@toski-labs/ds/tailwind.css";
+@import "@toski-labs/ds/themes/pethealth.css";
+
+/*
+  TODO(ds): tokens que o DS 0.5.3 ainda não entrega para a web. Cada variável abaixo tem o nome do token
+  pedido (ver docs/PLANO.md › Pendências do DS) e o valor aprovado no canvas. Quando o DS publicar,
+  apagar este bloco: as classes (bg-feature-card etc.) continuam iguais.
+*/
+:root {
+  --toski-feature-card: #3e4c8a; /* já existe no tokens.json (themes.pethealth.featureCard), mas não sai para a web */
+  --toski-on-feature-card: #fff8ee; /* idem (onFeatureCard) */
+  --toski-on-feature-card-accent: #c9d0f2; /* título da seção e checks sobre o cartão */
+  --toski-on-feature-card-muted: rgb(255 248 238 / 0.8); /* texto corrido sobre o cartão */
+  --toski-sheet: #ffffff; /* folha de PDF, sempre clara */
+  --toski-sheet-ink: #231b17;
+  --toski-sheet-muted: #6b5648;
+  --toski-sheet-line: #f3e4cf;
+  --toski-sheet-rule: #e6d8c4;
+  --toski-sheet-badge: #f8e0d4; /* selo PDF */
+  --toski-sheet-badge-ink: #a3341a;
+  --toski-sheet-avatar: #db9a5b;
+  --toski-phone-bezel: #1b1511; /* moldura do iPhone ilustrado */
+  --toski-pet-avatar-2: #8fa07c; /* avatares dos pets (mobile.pet.avatars[1]) */
+  --toski-footer-accent: #a9b4e8; /* destaque do produto sobre o rodapé, que é escuro nos dois temas */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --toski-feature-card: #2c376a;
+  }
+}
+:root[data-theme="dark"] {
+  --toski-feature-card: #2c376a;
+}
+@theme inline {
+  --color-feature-card: var(--toski-feature-card);
+  --color-on-feature-card: var(--toski-on-feature-card);
+  --color-on-feature-card-accent: var(--toski-on-feature-card-accent);
+  --color-on-feature-card-muted: var(--toski-on-feature-card-muted);
+  --color-sheet: var(--toski-sheet);
+  --color-sheet-ink: var(--toski-sheet-ink);
+  --color-sheet-muted: var(--toski-sheet-muted);
+  --color-sheet-line: var(--toski-sheet-line);
+  --color-sheet-rule: var(--toski-sheet-rule);
+  --color-sheet-badge: var(--toski-sheet-badge);
+  --color-sheet-badge-ink: var(--toski-sheet-badge-ink);
+  --color-sheet-avatar: var(--toski-sheet-avatar);
+  --color-phone-bezel: var(--toski-phone-bezel);
+  --color-pet-avatar-2: var(--toski-pet-avatar-2);
+  --color-footer-accent: var(--toski-footer-accent);
+}
+
+/*
+ * Faixa de destaque. No celular ocupa a largura toda; do tablet em diante vira um painel
+ * arredondado, centralizado e alinhado ao conteúdo.
+ */
+@utility band {
+  @media (width >= 48rem) {
+    width: calc(100% - 48px);
+    max-width: 1120px;
+    margin-inline: auto;
+    border-radius: var(--radius-panel);
+
+    & > .page {
+      padding-inline: clamp(32px, 4.5vw, 56px);
+    }
+    /* Última faixa da página: respiro antes do rodapé. */
+    &:not(:has(~ :not(script, style))) {
+      margin-bottom: 96px;
+    }
+  }
+}
+
+@layer base {
+  a {
+    color: var(--toski-link);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  a:hover {
+    color: var(--toski-accent-hover);
+  }
+  html {
+    scroll-padding-top: 16px;
+  }
+}
+
+/* Textos legais em Markdown (Privacidade): seções numeradas e listas em cartões. */
+@layer components {
+  .legal {
+    counter-reset: secao;
+    max-width: 720px;
+  }
+  .legal h2 {
+    counter-increment: secao;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-top: 44px;
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    scroll-margin-top: 24px;
+  }
+  .legal h2:first-child {
+    margin-top: 0;
+  }
+  .legal h2::before {
+    content: counter(secao, decimal-leading-zero);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--toski-accent-text);
+  }
+  .legal p {
+    margin-top: 14px;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .legal ul {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .legal li {
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: var(--toski-surface);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--toski-muted);
+  }
+  .legal li strong {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+    color: var(--toski-ink);
+  }
+}
+
+/* Troca de tema: as cores passam de um tema para o outro (View Transitions). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--toski-motion-enter);
+  animation-timing-function: var(--toski-ease-in-out);
+}

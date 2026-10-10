@@ -34,3 +34,6 @@ public/icon-*.png
 
 # relatórios do Lighthouse CI
 .lighthouseci/
+
+# playwright
+test-results/

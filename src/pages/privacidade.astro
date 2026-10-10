@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PrivacyPage from '../components/pages/PrivacyPage.astro';
+import { seo } from '../data/seo';
+
+
+const { title, description } = seo.pt.privacy;
+---
+
+<BaseLayout page="privacy" title={title} description={description}>
+  <PrivacyPage />
+</BaseLayout>

@@ -1,0 +1,119 @@
+---
+import '../styles/global.css';
+import outfitLatin from '@fontsource-variable/outfit/files/outfit-latin-wght-normal.woff2?url';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { themeScript } from '../lib/theme-script.mjs';
+import { ORG_ID } from '../lib/schema';
+import { alternatePath, APP_STORE_ID, getLang, routes, SUPPORT_EMAIL, useTranslations, type PageKey } from '../i18n/ui';
+
+interface Props {
+  page: PageKey;
+  title: string;
+  description: string;
+  /** Páginas que não devem aparecer no Google (404). */
+  noindex?: boolean;
+  /** Nós extras do JSON-LD (ex.: FAQPage). */
+  graph?: Record<string, unknown>[];
+}
+
+const { page, title, description, noindex = false, graph = [] } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const site = Astro.site!;
+const canonical = new URL(routes[lang][page], site);
+const alternate = new URL(alternatePath(page, lang), site);
+const ptUrl = lang === 'pt' ? canonical : alternate;
+const enUrl = lang === 'en' ? canonical : alternate;
+
+// Imagem de compartilhamento (1200 × 630), uma por idioma, gerada por scripts/generate-assets.mjs.
+const ogImage = new URL(`/og/og-${lang}.png`, site);
+const ogAlt =
+  lang === 'pt'
+    ? 'PetHealthTracker: o cachorro e o gato do app e o texto “Vacinas, remédios e lembretes do seu pet, tudo num lugar só.”'
+    : 'PetHealthTracker: the app’s dog and cat and the text “Your pet’s vaccines, medicines and reminders, all in one place.”';
+
+// Dados estruturados (schema.org). Não aparecem na tela.
+const orgId = ORG_ID;
+const organization = {
+  '@type': 'Organization',
+  '@id': orgId,
+  name: 'Toski Labs',
+  url: 'https://toski-labs.com.br',
+  logo: new URL('/icon-512.png', site).href,
+  email: SUPPORT_EMAIL,
+};
+const website = {
+  '@type': 'WebSite',
+  '@id': new URL('/#website', site).href,
+  name: 'PetHealthTracker',
+  url: new URL('/', site).href,
+  inLanguage: ['pt-BR', 'en'],
+  publisher: { '@id': orgId },
+};
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': noindex ? [] : [organization, website, ...graph] });
+---
+
+<!doctype html>
+<html lang={lang === 'pt' ? 'pt-BR' : 'en'} data-product="pethealth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Tema salvo no menu de configurações, aplicado antes da pintura (sem piscar). -->
+    <script is:inline set:html={themeScript} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {
+      noindex ? (
+        <meta name="robots" content="noindex" />
+      ) : (
+        <>
+          <link rel="canonical" href={canonical} />
+          <link rel="alternate" hreflang="pt-BR" href={ptUrl} />
+          <link rel="alternate" hreflang="en" href={enUrl} />
+          <link rel="alternate" hreflang="x-default" href={ptUrl} />
+        </>
+      )
+    }
+    <link rel="preload" href={outfitLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#F7F1E8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#231B17" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    {/* Liga quando o app tiver ID na App Store (APP_STORE_ID em src/i18n/ui.ts). */}
+    {APP_STORE_ID && <meta name="apple-itunes-app" content={`app-id=${APP_STORE_ID}`} />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="PetHealthTracker" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'pt' ? 'pt_BR' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'pt' ? 'en_US' : 'pt_BR'} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:secure_url" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogAlt} />
+    <meta name="generator" content={Astro.generator} />
+    {!noindex && <script type="application/ld+json" set:html={jsonLd} />}
+  </head>
+  <body class="flex min-h-dvh flex-col">
+    <a href="#conteudo" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-button focus:bg-surface focus:px-4 focus:py-3">
+      {t('skip')}
+    </a>
+    <Header page={page} />
+    <main id="conteudo" class="grow">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

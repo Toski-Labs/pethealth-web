@@ -1,0 +1,23 @@
+---
+/** Página não encontrada (o Firebase serve /404.html). Bilíngue, porque não sabemos o idioma de quem chegou. */
+import { Button } from '@toski-labs/ds';
+import Art from '../brand/Art.astro';
+import { fallenBallPair } from '../../lib/art';
+
+const pair = fallenBallPair('nf', 'O cachorro e o gato do PetHealthTracker olhando a bolinha que caiu longe');
+---
+
+<section aria-labelledby="nf-titulo" class="page flex flex-col items-center gap-7 pt-12 pb-24 text-center">
+  <div class="flex h-60 w-80 max-w-full items-center justify-center rounded-[120px] bg-hero">
+    <Art items={pair} class="w-[86%]" />
+  </div>
+  <div class="flex flex-col items-center gap-3">
+    <h1 id="nf-titulo" class="text-[clamp(32px,4vw,44px)] leading-[1.1] font-semibold tracking-[-0.02em]">A bolinha caiu longe.</h1>
+    <p class="max-w-115 text-lg leading-normal text-muted">Não encontramos esta página. Ela pode ter mudado de lugar.</p>
+    <p lang="en" class="max-w-115 text-base leading-normal text-muted">We couldn’t find this page. It may have moved.</p>
+  </div>
+  <div class="flex flex-wrap justify-center gap-3">
+    <Button href="/" size="md">Voltar para o início</Button>
+    <Button href="/en" size="md" variant="secondary" hrefLang="en">Go to the English site</Button>
+  </div>
+</section>

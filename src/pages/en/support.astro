@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SupportPage from '../../components/pages/SupportPage.astro';
+import { seo } from '../../data/seo';
+import { routes } from '../../i18n/ui';
+import { faqPage } from '../../lib/schema';
+
+const { title, description } = seo.en.support;
+void routes;
+---
+
+<BaseLayout page="support" title={title} description={description} graph={[faqPage('en', new URL(routes.en.support, Astro.site).href)]}>
+  <SupportPage />
+</BaseLayout>

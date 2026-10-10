@@ -1,0 +1,11 @@
+---
+/** "PetHealthTracker", com "Tracker" na cor de destaque (Índigo no claro, lilás no escuro). */
+interface Props {
+  class?: string;
+  /** Rodapé: fundo sempre escuro, então "Tracker" fica no lilás do produto. */
+  onDark?: boolean;
+}
+const { class: className, onDark = false } = Astro.props;
+---
+
+<span class:list={['font-semibold tracking-[-0.01em]', className]}>PetHealth<span class:list={[onDark ? 'text-footer-accent' : 'text-accent-text']}>Tracker</span></span>
