@@ -1,0 +1,12 @@
+---
+/** Arte inline do DS (claro e escuro). O CSS do DS mostra a versão do tema ativo ([data-art]). */
+interface Props {
+  items: { mode: 'light' | 'dark'; html: string }[];
+  class?: string;
+}
+const { items, class: className } = Astro.props;
+---
+
+<span class:list={['inline-block leading-none', className]}>
+  {items.map((item) => <span data-art={item.mode} class="block" set:html={item.html} />)}
+</span>

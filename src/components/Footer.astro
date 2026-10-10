@@ -1,0 +1,43 @@
+---
+import { AppIcon } from '@toski-labs/ds';
+import Art from './brand/Art.astro';
+import Wordmark from './brand/Wordmark.astro';
+import { appIcon } from '../lib/art';
+import { getLang, href, LAB_URL, useTranslations } from '../i18n/ui';
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const linkClass = 'inline-flex min-h-11 items-center text-[15px] text-footer-ink no-underline hover:text-caramelo';
+const titleClass = 'mb-1.5 text-[13px] font-semibold uppercase tracking-[0.06em] text-footer-muted';
+---
+
+<footer class="bg-footer text-footer-ink">
+  <div class="page flex flex-col gap-10 pt-14 pb-10">
+    <div class="flex flex-wrap justify-between gap-8">
+      <div class="flex max-w-80 flex-col gap-3">
+        <div class="flex items-center gap-2.5">
+          <Art items={appIcon('ftr', 36)} class="shrink-0 overflow-hidden rounded-[22%]" />
+          <Wordmark class="text-[22px]" onDark />
+        </div>
+        <p class="text-[15px] leading-normal text-footer-muted">{t('site.tagline')}</p>
+      </div>
+      <div class="flex flex-wrap gap-12">
+        <nav aria-labelledby="rodape-lab" class="flex flex-col gap-1">
+          <p id="rodape-lab" class={titleClass}>{t('footer.lab')}</p>
+          <a href={LAB_URL[lang]} class={linkClass}>toski-labs.com.br</a>
+        </nav>
+        <nav aria-labelledby="rodape-ajuda" class="flex flex-col gap-1">
+          <p id="rodape-ajuda" class={titleClass}>{t('footer.help')}</p>
+          <a href={href(lang, 'support')} class={linkClass}>{t('nav.support')}</a>
+          <a href={href(lang, 'privacy')} class={linkClass}>{t('nav.privacy')}</a>
+        </nav>
+      </div>
+    </div>
+    <div class="border-t border-footer-line pt-6">
+      <a href={LAB_URL[lang]} class="inline-flex min-h-11 items-center gap-2.5 text-sm text-footer-muted no-underline hover:text-caramelo">
+        <AppIcon size={28} />
+        <span>© {new Date().getFullYear()} <span class="font-semibold text-footer-ink">toski</span> <span class="text-caramelo">labs</span></span>
+      </a>
+    </div>
+  </div>
+</footer>
