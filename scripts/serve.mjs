@@ -36,13 +36,13 @@ export function serve(port = 4322) {
         if (!file.startsWith(dist)) break;
         const body = await readFile(file);
         const gz = compressible.test(file) && /gzip/.test(req.headers['accept-encoding'] ?? '');
-        res.writeHead(200, { 'content-type': types[path.extname(file)] ?? 'application/octet-stream', ...headersFor(candidate), ...(gz ? { 'content-encoding': 'gzip', vary: 'accept-encoding' } : {}) });
+        res.writeHead(200, { 'content-type': types[path.extname(file)] ?? 'application/octet-stream', ...headersFor(url), ...(gz ? { 'content-encoding': 'gzip', vary: 'accept-encoding' } : {}) });
         return res.end(gz ? gzipSync(body) : body);
       } catch {}
     }
     const body = await readFile(path.join(dist, '404.html'));
     const gz = /gzip/.test(req.headers['accept-encoding'] ?? '');
-    res.writeHead(404, { 'content-type': types['.html'], ...headersFor('/404.html'), ...(gz ? { 'content-encoding': 'gzip', vary: 'accept-encoding' } : {}) });
+    res.writeHead(404, { 'content-type': types['.html'], ...headersFor(url), ...(gz ? { 'content-encoding': 'gzip', vary: 'accept-encoding' } : {}) });
     res.end(gz ? gzipSync(body) : body);
   });
   return new Promise((resolve) => server.listen(port, '127.0.0.1', () => resolve(server)));

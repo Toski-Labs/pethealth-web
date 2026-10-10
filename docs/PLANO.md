@@ -44,13 +44,16 @@ Leva 1 (`feat/site-v1`) pronta para PR (10 out 2026: menu e "Copiar e-mail" do S
 
 ### Falta (fora desta leva)
 - [!] `/.well-known/apple-app-site-association`: depende do Team ID da conta paga da Apple.
-- Deploy (manual, só quando pedido): criar o site `pethealth-toskilabs` no console do Firebase, apontar o domínio `pethealth.toski-labs.com.br`, `npm run build` e `firebase deploy --only hosting`.
+- Deploy (manual): `npm run deploy` (build + `firebase deploy --only hosting`). Primeiro deploy feito em 10 out 2026 em https://pethealth-toskilabs.web.app. Falta ligar o domínio `pethealth.toski-labs.com.br` ao site no console do Firebase.
 - Link do rodapé para toski-labs.com.br só funciona quando o domínio apontar para o site da Toski (hoje em toski-labs.web.app).
 - Link da App Store: botão "Em breve" vira link e `APP_STORE_ID` liga o banner do Safari.
 - Preços (hoje "Em breve" / "Soon"), junto com o lançamento.
 - Validação online, manual: Rich Results Test e validator.schema.org (`MobileApplication` sem `offers` não vira rich result; o FAQ só aparece no Google para sites oficiais e de saúde, mas o marcado é válido).
 - Google Search Console: verificação pelo DNS, depois do deploy.
 - Site da Toski (leva separada): card do projeto apontando para o subdomínio e 301 de `/pethealthtracker`.
+
+## Cache do HTML
+Com `cleanUrls`, o Firebase casa o `source` do `firebase.json` com a URL pedida (`/privacidade`), não com o arquivo (`privacidade.html`). A regra `**/*.html` sozinha não pega as páginas, que saíam com `max-age=3600`. Por isso cada rota tem a própria regra `max-age=0, must-revalidate`. `scripts/serve.mjs` (usado no axe e no Lighthouse) casa pela URL pedida, como o Firebase. A 404 (qualquer URL inexistente) não dá para cobrir por glob.
 
 ## CI (GitHub Actions)
 - `.github/workflows/ci.yml` roda `npm run ci` em PR, em `ubuntu-24.04` (fixo; o `ubuntu-latest` vira Ubuntu 26 em 19/out), com `actions/checkout@v7` e `actions/setup-node@v7` (Node 24).
