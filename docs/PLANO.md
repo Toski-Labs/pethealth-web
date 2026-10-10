@@ -9,7 +9,7 @@ Regra: tudo gratuito, site estático, sem cookies, sem analytics, sem scripts de
 - Tema do produto: `<html data-product="pethealth">` + `@toski-labs/ds/themes/pethealth.css`. Claro e escuro automáticos, com o menu de configurações (tema e idioma) igual ao da Toski. A pílula PT/EN do canvas é da versão antiga e não entrou.
 - Âncoras: `#recursos` e `#planos` em PT; `#features` e `#plans` em EN.
 - JavaScript no navegador: só o script do tema (inline, no `<head>`) e o do menu de configurações. Sem `motion.ts`, voltar ao topo, aviso de idioma nem campanhas.
-- Suporte sem JavaScript: `mailto:` com o e-mail visível e selecionável (sem "Copiar e-mail" nem menu de webmail).
+- Suporte sem JavaScript: o botão "Escrever e-mail" abre um menu (`<details>` nativo) com Gmail e Outlook no navegador e o app de e-mail (`mailto:`), porque o `mailto:` sozinho não abre nada para quem não tem app de e-mail configurado. O e-mail fica visível e selecionável. Sem o botão "Copiar e-mail" (precisaria de script) e sem o fechamento animado do menu do site da Toski.
 - E-mail de suporte: toskilabs@gmail.com. Rodapé: © do ano do build.
 - Política: igual à da Toski, exceto "Este site" (cita pethealth.toski-labs.com.br). Saíram os itens "Campanhas" e "Downloads", que são do site da Toski e não existem aqui. A seção de direitos não fala em exportar, então a descrição diz "ver, corrigir ou excluir".
 - SEO: títulos de 50–60 e descrições de 140–160 caracteres (`src/data/seo.ts`, conferidos por `check:seo`). `MobileApplication` com `LifestyleApplication` (constante `APP_CATEGORY` em `src/i18n/ui.ts`), `operatingSystem` "iOS 18.0 or later", sem `offers`, `aggregateRating` nem `review` até o app estar na loja. `FAQPage` no Suporte, com as mesmas perguntas.

@@ -5,8 +5,8 @@ import AxeBuilder from '@axe-core/playwright';
 import { pages, report } from './lib.mjs';
 import { serve } from './serve.mjs';
 
-const server = await serve(4323);
-const base = 'http://127.0.0.1:4323';
+const server = await serve(0);
+const base = `http://127.0.0.1:${server.address().port}`;
 const errors = [];
 const browser = await chromium.launch();
 let runs = 0;

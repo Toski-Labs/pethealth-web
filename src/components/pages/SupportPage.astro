@@ -1,6 +1,6 @@
 ---
 /** Suporte (PT e EN): contato, código de suporte e perguntas frequentes. Sem JavaScript. */
-import { Card, IconBox, Kicker, SectionHeading, buttonClasses } from '@toski-labs/ds';
+import { Card, Icon, IconBox, Kicker, SectionHeading, buttonClasses } from '@toski-labs/ds';
 import { faq } from '../../data/faq';
 import { getLang, href, SUPPORT_EMAIL } from '../../i18n/ui';
 import FaqItem from '../ui/FaqItem.astro';
@@ -17,6 +17,9 @@ const t = {
     mailBodyEnd: 'Respondemos em até 2 dias úteis.',
     mailCta: 'Escrever e-mail',
     mailSubject: 'Suporte PetHealthTracker',
+    mailWeb: 'no navegador',
+    mailApp: 'App de e-mail',
+    mailAppHint: 'Mail ou o app do seu aparelho',
     codeTitle: 'Inclua o seu código de suporte',
     codeBody: 'Ele ajuda a encontrar a sua conta sem você precisar mandar dados pessoais. Para copiar no app:',
     codeSteps: ['Ajustes', 'Ajuda e feedback', 'Sua conta', 'Copiar código'],
@@ -36,6 +39,9 @@ const t = {
     mailBodyEnd: 'We reply within 2 business days.',
     mailCta: 'Send an email',
     mailSubject: 'PetHealthTracker support',
+    mailWeb: 'in your browser',
+    mailApp: 'Email app',
+    mailAppHint: 'Mail or your device’s app',
     codeTitle: 'Include your support code',
     codeBody: 'It helps us find your account without you sending any personal details. To copy it in the app:',
     codeSteps: ['Settings', 'Help & feedback', 'Your account', 'Copy code'],
@@ -47,6 +53,9 @@ const t = {
   },
 }[lang];
 const mailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(t.mailSubject)}`;
+// Para quem não tem app de e-mail configurado o mailto não abre nada: o botão abre um menu com Gmail e Outlook no navegador.
+const gmail = `https://mail.google.com/mail/?view=cm&fs=1&to=${SUPPORT_EMAIL}&su=${encodeURIComponent(t.mailSubject)}`;
+const outlook = `https://outlook.live.com/mail/0/deeplink/compose?to=${SUPPORT_EMAIL}&subject=${encodeURIComponent(t.mailSubject)}`;
 ---
 
 <section aria-labelledby="suporte-titulo" class="page pt-10 pb-10">
@@ -60,7 +69,31 @@ const mailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(t.mailSubje
     <!-- O endereço fica visível e selecionável: quem não tem app de e-mail configurado copia daqui. -->
     <p class="text-base leading-normal text-muted">{t.mailBody} <strong class="font-semibold text-ink select-all">{SUPPORT_EMAIL}</strong>. {t.mailBodyEnd}</p>
     <div class="mt-1.5 flex flex-wrap gap-2.5">
-      <a href={mailto} class={buttonClasses('primary', 'md', 'no-underline max-sm:flex-auto max-sm:justify-center')}>{t.mailCta}</a>
+      <!-- <details> nativo: abre e fecha sem JavaScript. -->
+      <details class="group relative max-sm:flex-auto">
+        <summary class={buttonClasses('primary', 'md', 'w-full cursor-pointer list-none [&::-webkit-details-marker]:hidden')}>
+          {t.mailCta}<Icon name="chevron-down" size={18} stroke={2.2} className="transition-transform group-open:rotate-180" />
+        </summary>
+        <ul role="list" class="toski-menu absolute top-full left-0 z-20 mt-2 flex w-max min-w-full flex-col gap-0.5 rounded-card border border-line bg-surface p-1.5 shadow-[0_18px_44px_rgba(35,27,23,0.18)] [--menu-origin:top_left]">
+          {[
+            { label: 'Gmail', hint: t.mailWeb, href: gmail, external: true },
+            { label: 'Outlook', hint: t.mailWeb, href: outlook, external: true },
+            { label: t.mailApp, hint: t.mailAppHint, href: mailto, external: false },
+          ].map((o) => (
+            <li>
+              <a
+                href={o.href}
+                target={o.external ? '_blank' : undefined}
+                rel={o.external ? 'noopener' : undefined}
+                class="flex min-h-11 flex-col justify-center rounded-[10px] px-3 py-1.5 leading-tight text-ink no-underline hover:bg-tint hover:text-ink"
+              >
+                <span class="text-[15px] font-semibold">{o.label}</span>
+                <span class="text-xs text-muted">{o.hint}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </details>
     </div>
   </Card>
   <Card variant="hero" radius="panel" className="flex min-w-0 flex-[1_1_340px] flex-col gap-3.5 p-8">
