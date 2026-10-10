@@ -22,10 +22,11 @@ Precisa de Node 22.12 ou mais novo.
 | `npm run dev`              | Servidor local em `localhost:4321`                                |
 | `npm run build`            | Gera o site em `dist/` (antes, gera ícones e cards OG do DS)      |
 | `npm run preview`          | Abre o `dist/` localmente                                         |
+| `npm run deploy`           | Gera o site e publica no Firebase Hosting (só quando você rodar) |
 | `npm run ci`               | Tudo o que precisa passar antes de um PR (veja abaixo)            |
 
 `npm run ci` roda: `astro check`, build, `check:csp` (sem `style=` inline, hashes da CSP), `check:seo`, `check:links`, `check:jsonld`, axe e Lighthouse CI. Na primeira vez, `npx playwright install chromium`.
 
-O deploy é manual e só quando pedido; este repositório não faz deploy no CI.
+O deploy é manual (`npm run deploy`, com `firebase login` feito antes); este repositório não faz deploy no CI.
 
 O plano, as decisões e as pendências do DS estão em [`docs/PLANO.md`](docs/PLANO.md).
