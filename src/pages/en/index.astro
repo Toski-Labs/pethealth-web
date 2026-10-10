@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PetHealthTrackerPage from '../../components/pages/PetHealthTrackerPage.astro';
+import { seo } from '../../data/seo';
+import { mobileApplication } from '../../lib/schema';
+
+const { title, description } = seo.en.app;
+---
+
+<BaseLayout page="app" title={title} description={description} graph={[mobileApplication(Astro.site!, new URL('/en', Astro.site).href, description)]}>
+  <PetHealthTrackerPage />
+</BaseLayout>

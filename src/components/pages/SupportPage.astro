@@ -1,0 +1,94 @@
+---
+/** Suporte (PT e EN): contato, código de suporte e perguntas frequentes. Sem JavaScript. */
+import { Card, IconBox, Kicker, SectionHeading, buttonClasses } from '@toski-labs/ds';
+import { faq } from '../../data/faq';
+import { getLang, href, SUPPORT_EMAIL } from '../../i18n/ui';
+import FaqItem from '../ui/FaqItem.astro';
+
+const lang = getLang(Astro.currentLocale);
+const t = {
+  pt: {
+    kicker: 'Suporte',
+    title: 'Como podemos ajudar?',
+    lead: 'As respostas mais comuns estão aqui embaixo. Se não achar o que precisa, fale com a gente.',
+    contactLabel: 'Contato',
+    mailTitle: 'Fale com a gente',
+    mailBody: 'Mande um e-mail para',
+    mailBodyEnd: 'Respondemos em até 2 dias úteis.',
+    mailCta: 'Escrever e-mail',
+    mailSubject: 'Suporte PetHealthTracker',
+    codeTitle: 'Inclua o seu código de suporte',
+    codeBody: 'Ele ajuda a encontrar a sua conta sem você precisar mandar dados pessoais. Para copiar no app:',
+    codeSteps: ['Ajustes', 'Ajuda e feedback', 'Sua conta', 'Copiar código'],
+    codeStepsLabel: 'Caminho no app',
+    faqTitle: 'Perguntas frequentes',
+    faqLead: 'Sobre assinatura, conta e lembretes do PetHealthTracker.',
+    privLine: 'Quer saber o que fazemos com os seus dados?',
+    privCta: 'Ler a Política de Privacidade',
+  },
+  en: {
+    kicker: 'Support',
+    title: 'How can we help?',
+    lead: 'The most common answers are below. If you can’t find what you need, get in touch.',
+    contactLabel: 'Contact',
+    mailTitle: 'Get in touch',
+    mailBody: 'Email',
+    mailBodyEnd: 'We reply within 2 business days.',
+    mailCta: 'Send an email',
+    mailSubject: 'PetHealthTracker support',
+    codeTitle: 'Include your support code',
+    codeBody: 'It helps us find your account without you sending any personal details. To copy it in the app:',
+    codeSteps: ['Settings', 'Help & feedback', 'Your account', 'Copy code'],
+    codeStepsLabel: 'Path in the app',
+    faqTitle: 'FAQ',
+    faqLead: 'About PetHealthTracker subscriptions, accounts and reminders.',
+    privLine: 'Want to know what we do with your data?',
+    privCta: 'Read the Privacy Policy',
+  },
+}[lang];
+const mailto = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(t.mailSubject)}`;
+---
+
+<section aria-labelledby="suporte-titulo" class="page pt-10 pb-10">
+  <SectionHeading id="suporte-titulo" as="h1" kicker={t.kicker} title={t.title} lead={t.lead} />
+</section>
+
+<section aria-label={t.contactLabel} class="page flex flex-wrap gap-6 pb-22">
+  <Card radius="panel" className="flex min-w-0 flex-[1_1_340px] flex-col gap-3.5 p-8">
+    <IconBox name="mail" />
+    <h2 class="mt-1 text-2xl font-semibold">{t.mailTitle}</h2>
+    <!-- O endereço fica visível e selecionável: quem não tem app de e-mail configurado copia daqui. -->
+    <p class="text-base leading-normal text-muted">{t.mailBody} <strong class="font-semibold text-ink select-all">{SUPPORT_EMAIL}</strong>. {t.mailBodyEnd}</p>
+    <div class="mt-1.5 flex flex-wrap gap-2.5">
+      <a href={mailto} class={buttonClasses('primary', 'md', 'no-underline max-sm:flex-auto max-sm:justify-center')}>{t.mailCta}</a>
+    </div>
+  </Card>
+  <Card variant="hero" radius="panel" className="flex min-w-0 flex-[1_1_340px] flex-col gap-3.5 p-8">
+    <IconBox name="copy" on="surface" />
+    <h2 class="mt-1 text-2xl font-semibold">{t.codeTitle}</h2>
+    <p class="text-base leading-normal text-muted">{t.codeBody}</p>
+    <ol role="list" aria-label={t.codeStepsLabel} class="mt-1.5 flex flex-wrap items-center gap-2">
+      {t.codeSteps.map((step) => (
+        <li class="inline-flex h-8.5 items-center rounded-[10px] bg-surface px-3 text-sm font-medium">{step}</li>
+      ))}
+    </ol>
+  </Card>
+</section>
+
+<section aria-labelledby="faq-titulo" class="band bg-hero">
+  <div class="page flex flex-wrap gap-x-16 gap-y-8 pt-20 pb-24">
+    <div class="flex min-w-0 flex-[1_1_260px] flex-col gap-2.5">
+      <Kicker>PetHealthTracker</Kicker>
+      <h2 id="faq-titulo" class="text-[clamp(30px,3.6vw,42px)] leading-[1.1] font-semibold tracking-[-0.02em]">{t.faqTitle}</h2>
+      <p class="text-base leading-normal text-muted">{t.faqLead}</p>
+    </div>
+    <div class="flex min-w-0 flex-[999_1_560px] flex-col gap-2.5">
+      {faq[lang].map(([q, a]) => <FaqItem question={q}><p>{a}</p></FaqItem>)}
+    </div>
+  </div>
+</section>
+
+<section aria-label={t.privCta} class="page flex flex-wrap items-center justify-between gap-4 pt-14 pb-20">
+  <p class="text-[17px] text-muted">{t.privLine}</p>
+  <a href={href(lang, 'privacy')} class="inline-flex min-h-11 items-center text-base font-semibold no-underline hover:underline">{t.privCta}</a>
+</section>
