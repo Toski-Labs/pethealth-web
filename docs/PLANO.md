@@ -40,7 +40,7 @@ Nada disso foi editado no DS. Cada item vive em `src/styles/global.css` como var
 - Fase 5: `npm run ci` + workflow do GitHub Actions ✅
 
 ## Status (10 out 2026)
-Leva 1 (`feat/site-v1`) pronta para PR (10 out 2026: menu e "Copiar e-mail" do Suporte conferidos no navegador, `npm run ci` completo verde, capturas 390/1280 claro e escuro do Suporte e do bloco de ajuda). `npm run ci` = `astro check` → build → `check:csp` → `check:seo` → `check:links` → `check:jsonld` → axe (7 páginas × claro/escuro × 390/1280, com o menu aberto) → Lighthouse CI (4 perfis × 7 páginas).
+Leva 1 (`feat/site-v1`) pronta para PR (10 out 2026: menu e "Copiar e-mail" do Suporte conferidos no navegador, `npm run ci` completo verde, capturas 390/1280 claro e escuro do Suporte e do bloco de ajuda). `npm run ci` = `astro check` → build → `check:csp` → `check:seo` → `check:links` → `check:jsonld` → axe (7 páginas × claro/escuro × 390/1280, com o menu aberto) → Lighthouse CI (4 perfis × 7 páginas, em porta livre). Com outro projeto rodando ao mesmo tempo o desempenho oscila (vi 0,95 uma vez): rode o `ci` sozinho.
 
 ### Falta (fora desta leva)
 - [!] `/.well-known/apple-app-site-association`: depende do Team ID da conta paga da Apple.
