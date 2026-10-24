@@ -28,7 +28,7 @@ Precisa de Node 22.12 ou mais novo.
 | `npm run deploy:redirect`  | Publica os 301 do endereço antigo, site `pethealth` (só quando você rodar) |
 | `npm run ci`               | Tudo o que precisa passar antes de um PR (veja abaixo)            |
 
-`npm run ci` roda: `astro check`, build, `check:csp` (sem `style=` inline, hashes da CSP), `check:seo` (inclui o sitemap: exatamente as 6 páginas, nenhum `.xml`), `check:links`, `check:redirects` (os 301 do site antigo no `firebase.json`), `check:jsonld`, axe e Lighthouse CI. Na primeira vez, `npx playwright install chromium`.
+`npm run ci` roda: `astro check`, build, `check:csp` (sem `style=` inline, hashes da CSP), `check:seo` (inclui o sitemap: exatamente as 6 páginas, nenhum `.xml`), `check:links`, `check:redirects` (os 301 do site antigo no `firebase.json`), `check:cache` (`no-cache` em tudo, menos `/_astro/`, com cache longo), `check:jsonld`, axe e Lighthouse CI. Na primeira vez, `npx playwright install chromium`.
 
 O deploy é manual (`npm run deploy` e `npm run deploy:redirect`, com `firebase login` feito antes); este repositório não faz deploy no CI.
 

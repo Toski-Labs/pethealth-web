@@ -107,8 +107,10 @@ Halloween e Natal mudam o visual do site; o calendário vem do Remote Config, co
 - Cores sem token no DS: `TODO(ds)` no topo de `datas.css`.
 - Testes: `check:datas` confere que enfeites e dupla não cobrem texto, links nem botões de 360 a 1440 px, sem rolagem lateral, as imagens baixadas e o movimento; o axe roda Halloween e Natal em 4 páginas, claro e escuro (contraste da faixa).
 
-## Cache do HTML
-Com `cleanUrls`, o Firebase casa o `source` do `firebase.json` com a URL pedida (`/privacidade`), não com o arquivo (`privacidade.html`). A regra `**/*.html` sozinha não pega as páginas, que saíam com `max-age=3600`. Por isso cada rota tem a própria regra `max-age=0, must-revalidate`. `scripts/serve.mjs` (usado no axe e no Lighthouse) casa pela URL pedida, como o Firebase. A 404 (qualquer URL inexistente) não dá para cobrir por glob.
+## Cache do HTML (24 out 2026)
+- Antes: cada página tinha a própria regra `max-age=0, must-revalidate` no `firebase.json` (com `cleanUrls`, o Firebase casa o `source` com a URL pedida, `/privacidade`, e não com o arquivo, então `**/*.html` não pegava). Uma página nova esquecida voltava ao padrão do Firebase, `max-age=3600`, e depois de um deploy o visitante ficava com o HTML antigo apontando para arquivos de `/_astro/` que já não existiam (imagens quebradas). A 404, o sitemap e o `robots.txt` saíam com 1 hora; favicon, `site.webmanifest` e `/og/` com 7 dias, sem hash no nome.
+- Agora (como o `toski-labs-web` no PR #5): `**` com `Cache-Control: no-cache` (o navegador confere a cada visita; com ETag, volta 304 sem baixar de novo) e só `/_astro/**` (nome com hash) com `public, max-age=31536000, immutable`, por último. Quando duas regras definem o mesmo cabeçalho, o Firebase usa a de baixo. `/datas/` não tem hash: fica `no-cache`, e trocar um desenho chega na hora.
+- `npm run check:cache` (no `npm run ci`) confere os cabeçalhos pelo `scripts/serve.mjs`, que aplica as regras como o Firebase (pela URL pedida, a de baixo vence).
 
 ## CI (GitHub Actions)
 - `.github/workflows/ci.yml` roda `npm run ci` em PR, em `ubuntu-24.04` (fixo; o `ubuntu-latest` vira Ubuntu 26 em 19/out), com `actions/checkout@v7` e `actions/setup-node@v7` (Node 24).

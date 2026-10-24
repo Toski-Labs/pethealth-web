@@ -19,13 +19,14 @@
     "check": "astro check",
     "check:links": "node scripts/check-links.mjs",
     "check:redirects": "node scripts/check-redirects.mjs",
+    "check:cache": "node scripts/check-cache.mjs",
     "check:csp": "node scripts/csp.mjs",
     "check:datas": "node scripts/check-datas.mjs",
     "check:seo": "node scripts/check-seo.mjs",
     "check:jsonld": "node scripts/validate-jsonld.mjs",
     "check:axe": "node scripts/axe.mjs",
     "check:lighthouse": "node scripts/lighthouse.mjs",
-    "ci": "npm run check && npm run build && npm run check:csp && npm run check:datas && npm run check:seo && npm run check:links && npm run check:redirects && npm run check:jsonld && npm run check:axe && npm run check:lighthouse"
+    "ci": "npm run check && npm run build && npm run check:csp && npm run check:datas && npm run check:seo && npm run check:links && npm run check:redirects && npm run check:cache && npm run check:jsonld && npm run check:axe && npm run check:lighthouse"
   },
   "dependencies": {
     "@astrojs/react": "^7.0.1",
