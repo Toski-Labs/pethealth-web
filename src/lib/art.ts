@@ -1,14 +1,14 @@
 /**
- * Arte do PetHealthTracker vinda do Toski DS (@toski-labs/ds/products/pethealth), inline no HTML.
+ * Arte do Pawta vinda do Toski DS (@toski-labs/ds/products/pawta), inline no HTML.
  * Não usamos ProductIcon/ProductMascot/Mascot do pacote: eles emitem style="" e a CSP não permite.
  * Ver docs/PLANO.md › Pendências do DS.
  */
-import iconLight from '@toski-labs/ds/products/pethealth/icon/pethealth-icon-light.svg?raw';
-import iconDark from '@toski-labs/ds/products/pethealth/icon/pethealth-icon-dark.svg?raw';
-import pairBaseLight from '@toski-labs/ds/products/pethealth/mascots/pair-base-light.svg?raw';
-import pairBaseDark from '@toski-labs/ds/products/pethealth/mascots/pair-base-dark.svg?raw';
-import ballLight from '@toski-labs/ds/products/pethealth/mascots/ball-indigo-light.svg?raw';
-import ballDark from '@toski-labs/ds/products/pethealth/mascots/ball-indigo-dark.svg?raw';
+import iconLight from '@toski-labs/ds/products/pawta/icon/pawta-icon-light.svg?raw';
+import iconDark from '@toski-labs/ds/products/pawta/icon/pawta-icon-dark.svg?raw';
+import pairBaseLight from '@toski-labs/ds/products/pawta/mascots/pair-base-light.svg?raw';
+import pairBaseDark from '@toski-labs/ds/products/pawta/mascots/pair-base-dark.svg?raw';
+import ballLight from '@toski-labs/ds/products/pawta/mascots/ball-indigo-light.svg?raw';
+import ballDark from '@toski-labs/ds/products/pawta/mascots/ball-indigo-dark.svg?raw';
 
 export type Mode = 'light' | 'dark';
 

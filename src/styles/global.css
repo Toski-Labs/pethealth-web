@@ -4,11 +4,11 @@
 /*
   Toski DS (@toski-labs/ds): variáveis --toski-* (claro/escuro e data-theme), @theme com as classes
   (bg-surface, text-muted, rounded-card…), utilitário `page` e estilos de base.
-  Tema do produto: <html data-product="pethealth"> troca só o destaque (Índigo/lilás) e o hero.
+  Tema do produto: <html data-product="pawta"> troca só o destaque (Índigo/lilás) e o hero.
   https://toski-labs.github.io/toski-ds/
 */
 @import "@toski-labs/ds/tailwind.css";
-@import "@toski-labs/ds/themes/pethealth.css";
+@import "@toski-labs/ds/themes/pawta.css";
 
 /*
   TODO(ds): tokens que o DS 0.5.3 ainda não entrega para a web. Cada variável abaixo tem o nome do token
@@ -16,7 +16,7 @@
   apagar este bloco: as classes (bg-feature-card etc.) continuam iguais.
 */
 :root {
-  --toski-feature-card: #3e4c8a; /* já existe no tokens.json (themes.pethealth.featureCard), mas não sai para a web */
+  --toski-feature-card: #3e4c8a; /* já existe no tokens.json (themes.pawta.featureCard), mas não sai para a web */
   --toski-on-feature-card: #fff8ee; /* idem (onFeatureCard) */
   --toski-on-feature-card-accent: #c9d0f2; /* título da seção e checks sobre o cartão */
   --toski-on-feature-card-muted: rgb(255 248 238 / 0.8); /* texto corrido sobre o cartão */

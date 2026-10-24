@@ -1,6 +1,6 @@
 {
-  "name": "PetHealthTracker",
-  "short_name": "PetHealth",
+  "name": "Pawta",
+  "short_name": "Pawta",
   "description": "Vacinas, remédios e lembretes do seu pet, tudo num lugar só.",
   "lang": "pt-BR",
   "start_url": "/",

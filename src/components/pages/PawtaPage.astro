@@ -32,9 +32,9 @@ const t = {
     pdfTitle: 'O histórico do seu pet num PDF, pronto para enviar',
     pdfBody: 'Gere a carteirinha de vacinação ou o histórico completo e mande para o veterinário, a creche ou o hotelzinho direto do iPhone, por WhatsApp, e-mail ou AirDrop.',
     pdfList: ['Carteirinha com todas as vacinas, datas e próximas doses', 'Histórico completo: vacinas, remédios, consultas e peso', 'Pelo menu de compartilhar do iPhone, sem copiar nada à mão'],
-    plansKicker: 'Grátis e Plus',
-    plansTitle: 'Comece com 7 dias de Plus, sem cartão',
-    plansLead: 'Depois do teste, siga no grátis ou assine o Plus. O grátis limita como o app lembra, nunca quantas coisas ele lembra.',
+    plansKicker: 'Grátis e Pawta Plus',
+    plansTitle: 'Comece com 7 dias de Pawta Plus, sem cartão',
+    plansLead: 'Depois do teste, siga no grátis ou assine o Pawta Plus. O grátis limita como o app lembra, nunca quantas coisas ele lembra.',
     freeName: 'Grátis',
     freeSub: 'Para cuidar de um pet no dia a dia',
     freeList: ['1 pet ativo (arquivados não contam)', 'Todos os registros de saúde e lembretes, sem limite', '1 aviso por item, no horário que você escolher', 'Anúncios discretos, nunca na tela inicial nem nos formulários'],
@@ -75,9 +75,9 @@ const t = {
     pdfTitle: 'Your pet’s health history as a PDF, ready to send',
     pdfBody: 'Create the vaccine card or the full history and send it to the vet, daycare or pet hotel straight from your iPhone, by WhatsApp, email or AirDrop.',
     pdfList: ['Vaccine card with every shot, date and next dose', 'Full history: vaccines, medicines, vet visits and weight', 'Uses the iPhone share menu, no copying by hand'],
-    plansKicker: 'Free and Plus',
-    plansTitle: 'Start with 7 days of Plus, no card needed',
-    plansLead: 'After the trial, keep the free plan or subscribe to Plus. Free limits how the app reminds you, never how many things it remembers.',
+    plansKicker: 'Free and Pawta Plus',
+    plansTitle: 'Start with 7 days of Pawta Plus, no card needed',
+    plansLead: 'After the trial, keep the free plan or subscribe to Pawta Plus. Free limits how the app reminds you, never how many things it remembers.',
     freeName: 'Free',
     freeSub: 'For looking after one pet day to day',
     freeList: ['1 active pet (archived pets don’t count)', 'Every health record and reminder, unlimited', '1 alert per item, at the time you choose', 'Subtle ads, never on the home screen or in forms'],
@@ -106,7 +106,7 @@ const t = {
     <Art items={appIcon('hero', 96)} class="shrink-0 self-start overflow-hidden rounded-[22%] [&_svg]:size-16 sm:[&_svg]:size-24" />
     <div class="flex flex-col gap-3">
       <h1 id="inicio-titulo" class="text-[clamp(40px,5.2vw,64px)] leading-[1.04] font-semibold tracking-tight [overflow-wrap:anywhere] max-[359px]:text-[34px]">
-        PetHealth<span class="text-accent-text">Tracker</span>
+        Paw<span class="text-accent-text">ta</span>
       </h1>
       <p class="max-w-130 text-xl leading-[1.4] font-medium sm:text-[22px]">{t.tagline}</p>
       <p class="max-w-130 text-[17px] leading-[1.55] text-muted">{t.body}</p>
@@ -173,7 +173,7 @@ const t = {
   </div>
 </section>
 
-<!-- Grátis e Plus -->
+<!-- Grátis e Pawta Plus -->
 <section id={ids.plans} aria-labelledby="planos-titulo" class="band scroll-mt-6 bg-hero">
   <div class="page flex flex-col gap-7 py-14 sm:gap-9 sm:py-22">
     <SectionHeading id="planos-titulo" kicker={t.plansKicker} title={t.plansTitle} lead={t.plansLead} />

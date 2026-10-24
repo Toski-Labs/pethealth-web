@@ -1,5 +1,17 @@
 {
   "projects": {
     "default": "toski-labs"
+  },
+  "targets": {
+    "toski-labs": {
+      "hosting": {
+        "pawta": [
+          "pawta-toskilabs"
+        ],
+        "pethealth": [
+          "pethealth-toskilabs"
+        ]
+      }
+    }
   }
 }

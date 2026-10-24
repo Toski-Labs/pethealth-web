@@ -18,16 +18,16 @@ const stripMeta = (svg) => svg.replace(/<metadata>[\s\S]*?<\/metadata>/g, '');
 await mkdir(path.join(pub, 'og'), { recursive: true });
 
 // Ícones
-const iconSvg = stripMeta(await read('products/pethealth/icon/pethealth-icon-light.svg'));
+const iconSvg = stripMeta(await read('products/pawta/icon/pawta-icon-light.svg'));
 await writeFile(path.join(pub, 'favicon.svg'), iconSvg);
-const iconPng = await readFile(path.join(ds, 'products/pethealth/icon/pethealth-icon-light-1024.png'));
+const iconPng = await readFile(path.join(ds, 'products/pawta/icon/pawta-icon-light-1024.png'));
 for (const [name, size] of [['apple-touch-icon.png', 180], ['icon-192.png', 192], ['icon-512.png', 512]]) {
   // O ícone é quadrado e opaco (o iOS exige isso no apple-touch-icon); o redimensionamento descarta o metadata C2PA.
   await sharp(iconPng).resize(size, size).flatten().png({ compressionLevel: 9 }).toFile(path.join(pub, name));
 }
 
 // Cards de compartilhamento
-const tokens = JSON.parse(await read('build/json/web.pethealth.json'));
+const tokens = JSON.parse(await read('build/json/web.pawta.json'));
 const c = tokens.light;
 const fonts = [
   { name: 'Outfit', weight: 400, style: 'normal', data: await readFile(path.join(root, 'node_modules/@fontsource/outfit/files/outfit-latin-400-normal.woff')) },
@@ -35,7 +35,7 @@ const fonts = [
 ];
 const dataUri = (svg) => `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
 // O SVG do DS traz width/height próprios (860 × 460); aqui o tamanho vem do <img>.
-const pairSvg = stripMeta(await read('products/pethealth/mascots/pair-light.svg')).replace(/ width="860" height="460"/, '');
+const pairSvg = stripMeta(await read('products/pawta/mascots/pair-light.svg')).replace(/ width="860" height="460"/, '');
 const text = {
   pt: { tagline: 'Vacinas, remédios e lembretes do seu pet, tudo num lugar só.', badge: 'App para iPhone · iOS 18+' },
   en: { tagline: 'Your pet’s vaccines, medicines and reminders, all in one place.', badge: 'iPhone app · iOS 18+' },
@@ -48,8 +48,8 @@ for (const lang of ['pt', 'en']) {
       el('div', { alignItems: 'center', gap: 24 }, [
         { type: 'img', props: { src: dataUri(iconSvg), width: 112, height: 112, style: { borderRadius: 25 } } },
         el('div', { fontSize: 60, fontWeight: 600, letterSpacing: -1 }, [
-          { type: 'span', props: { children: 'PetHealth' } },
-          { type: 'span', props: { style: { color: c.accent }, children: 'Tracker' } },
+          { type: 'span', props: { children: 'Paw' } },
+          { type: 'span', props: { style: { color: c.accent }, children: 'ta' } },
         ]),
       ]),
       el('div', { fontSize: 46, fontWeight: 600, lineHeight: 1.12, letterSpacing: -0.5 }, text[lang].tagline),

@@ -1,8 +1,8 @@
 // SEO básico do HTML gerado (npm run check:seo): título e descrição (tamanho, únicos), canonical, hreflang, h1 único,
-// níveis de título sem pular, Open Graph, noindex da 404, robots.txt, sitemap.
+// níveis de título sem pular, Open Graph, noindex da 404, robots.txt, sitemap (exatamente as 6 páginas, nenhum .xml).
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { dist, loadPages, report, SITE } from './lib.mjs';
+import { dist, loadPages, pages as allPages, report, SITE } from './lib.mjs';
 
 const errors = [];
 const pages = await loadPages();
@@ -56,4 +56,14 @@ for (const p of pages) {
 }
 const robotsTxt = await readFile(path.join(dist, 'robots.txt'), 'utf8');
 if (!robotsTxt.includes(`Sitemap: ${SITE}/sitemap-index.xml`)) errors.push('robots.txt não aponta para o sitemap-index.xml');
-report('seo: títulos, descrições, canonical, hreflang, Open Graph, h1', errors);
+
+// Sitemap: o índice aponta só para o sitemap-0.xml, e o sitemap-0.xml lista exatamente as 6 páginas indexáveis,
+// sem nenhum .xml (nem ele mesmo) e sem a 404.
+const locs = async (file) => [...(await readFile(path.join(dist, file), 'utf8')).matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+const indexLocs = await locs('sitemap-index.xml');
+if (indexLocs.join() !== `${SITE}/sitemap-0.xml`) errors.push(`sitemap-index.xml: esperado só ${SITE}/sitemap-0.xml, veio ${indexLocs.join(', ') || 'nada'}`);
+const pageLocs = (await locs('sitemap-0.xml')).sort();
+const expected = allPages.filter((p) => !p.noindex).map((p) => `${SITE}${p.url}`).sort();
+for (const loc of pageLocs) if (loc.endsWith('.xml')) errors.push(`sitemap-0.xml: lista um sitemap (${loc})`);
+if (pageLocs.join() !== expected.join()) errors.push(`sitemap-0.xml: esperado exatamente ${expected.join(', ')}; veio ${pageLocs.join(', ')}`);
+report('seo: títulos, descrições, canonical, hreflang, Open Graph, h1, sitemap', errors);

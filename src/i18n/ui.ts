@@ -22,7 +22,7 @@ export const anchors: Record<Lang, { features: string; plans: string }> = {
 /** Textos compartilhados (cabeçalho, rodapé, metadados). Textos de cada página ficam na própria página. */
 export const ui = {
   pt: {
-    'site.name': 'PetHealthTracker',
+    'site.name': 'Pawta',
     'site.tagline': 'Vacinas, remédios e lembretes do seu pet, tudo num lugar só.',
     'nav.label': 'Principal',
     'nav.features': 'Recursos',
@@ -45,7 +45,7 @@ export const ui = {
     'skip': 'Pular para o conteúdo',
   },
   en: {
-    'site.name': 'PetHealthTracker',
+    'site.name': 'Pawta',
     'site.tagline': 'Your pet’s vaccines, medicines and reminders, all in one place.',
     'nav.label': 'Main',
     'nav.features': 'Features',

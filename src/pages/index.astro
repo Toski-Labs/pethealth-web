@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PetHealthTrackerPage from '../components/pages/PetHealthTrackerPage.astro';
+import PawtaPage from '../components/pages/PawtaPage.astro';
 import { seo } from '../data/seo';
 import { mobileApplication } from '../lib/schema';
 
@@ -8,5 +8,5 @@ const { title, description } = seo.pt.app;
 ---
 
 <BaseLayout page="app" title={title} description={description} graph={[mobileApplication(Astro.site!, new URL('/', Astro.site).href, description)]}>
-  <PetHealthTrackerPage />
+  <PawtaPage />
 </BaseLayout>

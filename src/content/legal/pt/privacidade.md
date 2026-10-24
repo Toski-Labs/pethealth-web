@@ -1,12 +1,12 @@
 ---
 title: Política de Privacidade
-lead: Seus dados e os dos seus pets são seus. Aqui está, sem juridiquês, o que o PetHealthTracker guarda, por quê e o que você pode fazer.
+lead: Seus dados e os dos seus pets são seus. Aqui está, sem juridiquês, o que o Pawta guarda, por quê e o que você pode fazer.
 updated: "6 de outubro de 2026"
 ---
 
 ## Quem somos
 
-A Toski Labs é o laboratório de apps responsável pelo PetHealthTracker e pelo tratamento dos dados descritos aqui. Contato: [toskilabs@gmail.com](mailto:toskilabs@gmail.com).
+A Toski Labs é o laboratório de apps responsável pelo Pawta e pelo tratamento dos dados descritos aqui. Contato: [toskilabs@gmail.com](mailto:toskilabs@gmail.com).
 
 ## O que coletamos
 
@@ -63,7 +63,7 @@ Pela LGPD, você pode pedir acesso, correção, portabilidade e exclusão dos se
 
 ## Este site
 
-O site do PetHealthTracker (pethealth.toski-labs.com.br) não tem login, não usa cookies e não usa ferramentas de análise ou de publicidade.
+O site do Pawta (pawta.toski-labs.com.br) não tem login, não usa cookies e não usa ferramentas de análise ou de publicidade.
 
 - **Suas preferências**
   O tema e o idioma que você escolher ficam salvos só no seu navegador, para o site lembrar na próxima visita. Essa informação não sai do seu aparelho.
@@ -72,7 +72,7 @@ O site do PetHealthTracker (pethealth.toski-labs.com.br) não tem login, não us
 
 ## Crianças
 
-O PetHealthTracker é feito para adultos que cuidam de pets. Ele não é direcionado a crianças e não coletamos de propósito dados de menores de 13 anos. Se você acha que uma criança criou uma conta, escreva para [toskilabs@gmail.com](mailto:toskilabs@gmail.com) e apagamos os dados.
+O Pawta é feito para adultos que cuidam de pets. Ele não é direcionado a crianças e não coletamos de propósito dados de menores de 13 anos. Se você acha que uma criança criou uma conta, escreva para [toskilabs@gmail.com](mailto:toskilabs@gmail.com) e apagamos os dados.
 
 ## Mudanças nesta política
 

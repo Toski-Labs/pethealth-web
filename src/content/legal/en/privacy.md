@@ -1,12 +1,12 @@
 ---
 title: Privacy Policy
-lead: Your data and your pets’ data belong to you. Here’s what PetHealthTracker keeps, why, and what you can do about it, in plain words.
+lead: Your data and your pets’ data belong to you. Here’s what Pawta keeps, why, and what you can do about it, in plain words.
 updated: "October 6, 2026"
 ---
 
 ## Who we are
 
-Toski Labs is the app lab behind PetHealthTracker and is responsible for the data described here. Contact: [toskilabs@gmail.com](mailto:toskilabs@gmail.com).
+Toski Labs is the app lab behind Pawta and is responsible for the data described here. Contact: [toskilabs@gmail.com](mailto:toskilabs@gmail.com).
 
 ## What we collect
 
@@ -63,7 +63,7 @@ Under Brazil’s LGPD (and similar laws where you live), you can ask to access, 
 
 ## This website
 
-The PetHealthTracker website (pethealth.toski-labs.com.br) has no sign-in and uses no cookies, analytics or advertising tools.
+The Pawta website (pawta.toski-labs.com.br) has no sign-in and uses no cookies, analytics or advertising tools.
 
 - **Your preferences**
   The theme and language you choose are saved only in your browser, so the site remembers them next time. They never leave your device.
@@ -72,7 +72,7 @@ The PetHealthTracker website (pethealth.toski-labs.com.br) has no sign-in and us
 
 ## Children
 
-PetHealthTracker is made for adults who look after pets. It isn’t directed at children, and we don’t knowingly collect data from anyone under 13. If you think a child has created an account, email [toskilabs@gmail.com](mailto:toskilabs@gmail.com) and we’ll delete the data.
+Pawta is made for adults who look after pets. It isn’t directed at children, and we don’t knowingly collect data from anyone under 13. If you think a child has created an account, email [toskilabs@gmail.com](mailto:toskilabs@gmail.com) and we’ll delete the data.
 
 ## Changes to this policy
 
