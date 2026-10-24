@@ -4,6 +4,7 @@ import outfitLatin from '@fontsource-variable/outfit/files/outfit-latin-wght-nor
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import DatasRemoteConfig from '../components/datas/DatasRemoteConfig.astro';
+import FaixaData from '../components/datas/FaixaData.astro';
 import { themeScript } from '../lib/theme-script.mjs';
 import { datasScript } from '../lib/datas-especiais.mjs';
 import { ORG_ID } from '../lib/schema';
@@ -114,6 +115,7 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': noin
     <a href="#conteudo" class="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-button focus:bg-surface focus:px-4 focus:py-3">
       {t('skip')}
     </a>
+    <FaixaData />
     <Header page={page} />
     <main id="conteudo" class="grow">
       <slot />

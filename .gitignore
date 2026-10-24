@@ -31,6 +31,7 @@ public/og/
 public/favicon.svg
 public/apple-touch-icon.png
 public/icon-*.png
+public/datas/*/apple-touch-icon.png
 
 # relatórios do Lighthouse CI
 .lighthouseci/

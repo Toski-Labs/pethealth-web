@@ -30,6 +30,7 @@ Nada disso foi editado no DS. Cada item vive em `src/styles/global.css` como var
 5. **Folha de PDF sempre clara:** `--toski-sheet`, `-sheet-ink`, `-sheet-muted`, `-sheet-line`, `-sheet-rule`, `-sheet-badge`, `-sheet-badge-ink`, `-sheet-avatar` (hoje valores do `PdfCard` da Toski). O `surface` do DS escurece no tema escuro e não serve.
 6. **Cores do rodapé e do celular ilustrado:** `--toski-footer-accent` (`#A9B4E8`, destaque do produto sobre o rodapé, que é escuro nos dois temas), `--toski-phone-bezel` (`#1B1511`) e `--toski-pet-avatar-2` (`#8FA07C`, `mobile.pet.avatars[1]`; o DS só exporta a lista para o app).
 7. **CSP:** `Mascot`, `ProductIcon` e `ProductMascot` emitem `style="…"` (largura, `display`, variáveis de cor). Pedido: usar classes ou atributos de apresentação, sem `style=`. Até lá, não usamos os três.
+8. **Datas especiais:** tokens sazonais (`--data-noite` `#2B2340`, `--data-abobora` `#E8873A`, `--data-natal` `#C8402E`, `--data-natal-texto` `#FFFFFF`, `--data-hero-halloween` `#E3DCF0`, `--data-hero-natal` `#F6E3DF`, hoje em `src/styles/datas.css`), a dupla fantasiada (claro e escuro), os ícones das datas e os enfeites (`public/datas/`), e o script do `<head>` que escolhe a data (`src/lib/datas-especiais.mjs`), para este site e o da Toski Labs não se separarem.
 
 ## Fases
 - Fase 0: repositório, projeto Astro + Tailwind 4 + DS, i18n e rotas ✅
@@ -94,6 +95,17 @@ Halloween e Natal mudam o visual do site; o calendário vem do Remote Config, co
 **Escolha do tema** (`datasScript` em `src/lib/datas-especiais.mjs`, inline no `<head>` logo depois dos `<link>` de ícone, hash na CSP): lê o padrão embutido e o último valor guardado do Remote Config, escolhe o tema pela data local do navegador e marca o `<html>` antes da pintura (`data-tema`, `data-tema-enfeites`, `data-tema-icone` e `--tema-fim`, o fim da data já escrito no idioma). Troca o favicon e o `apple-touch-icon` pelos de `public/datas/<tema>/`. Valor novo do Remote Config só vale na próxima visita: nada troca depois que a página aparece. O script é texto (não função convertida) porque o build reescreve funções e o hash deixaria de bater.
 
 **Conferir em qualquer dia:** `?tema=halloween`, `?tema=natal`, `?tema=nenhum` (vale até fechar a aba; `?tema=auto` volta ao calendário). A página com `?tema=` ganha `noindex`; o canonical não leva a query e o sitemap não muda. `npm run check:datas` testa a escolha (véspera, primeiro e último dia, virada do ano, JSON inválido, `sites`, `ativo`, `forcar`, `?tema=`) e, no Chromium, o tema antes da pintura, os ícones e a CSP.
+
+**Visual** (`src/styles/datas.css`, `src/components/datas/FaixaData.astro`; canvas `SzSiteHalloween`, `SzSiteNatal`, `SzDupla`, `SzIcones`):
+- Faixa no topo, em todas as páginas (PT e EN, com o fim da data): Halloween roxa-noite com texto abóbora; Natal vermelha com texto branco. É um `<aside>` com rótulo "Data especial".
+- Ícone da data no cabeçalho e acima do "Pawta" na Home; favicon e `apple-touch-icon` da data (o PNG é gerado no build a partir de `icone.svg`).
+- Hero da Home: o celular continua; a dupla fantasiada senta na borda de baixo do círculo, o cachorro à esquerda e o gato à direita do celular (a mesma ilustração cortada ao meio, as beiradas atrás da moldura). Entre ~640 e ~830 px o círculo é quase da largura do celular e a dupla sai. No claro, o círculo fica no tom da data.
+- Enfeites: Halloween, três fantasminhas flutuando nos cantos de cima do círculo; Natal, a guirlanda entre a faixa e o cabeçalho (em todas as páginas), balançando. Reduzir movimento deixa tudo parado. Tudo `aria-hidden`.
+- As ilustrações são `background-image`: sem a data, nada de `/datas/` é baixado; com a data, só as dela (dupla clara ou escura conforme o tema).
+- Arquivos em `public/datas/<tema>/`, um por ilustração, sem depender do CSS do site (o site da Toski Labs usa os mesmos). O `fantasminha.svg` veio do `toski-labs-web` (PR #5), para os dois sites terem o mesmo. A `bengalinha.svg` fica para quem quiser usar sozinha (aqui ela está dentro da guirlanda).
+- Peso: sempre, ~2,6 KB gzip por página (script do `<head>`, CSS e faixa) + 1,8 KB do script do Remote Config (cache longo). Halloween ativo: +2,6 KB (fantasminha 0,3, dupla 1,0, ícone 1,3). Natal ativo: +3,2 KB (guirlanda 1,1, dupla 1,0, ícone 1,1). O `apple-touch-icon` (3,6 KB) só baixa ao adicionar à tela de início.
+- Cores sem token no DS: `TODO(ds)` no topo de `datas.css`.
+- Testes: `check:datas` confere que enfeites e dupla não cobrem texto, links nem botões de 360 a 1440 px, sem rolagem lateral, as imagens baixadas e o movimento; o axe roda Halloween e Natal em 4 páginas, claro e escuro (contraste da faixa).
 
 ## Cache do HTML
 Com `cleanUrls`, o Firebase casa o `source` do `firebase.json` com a URL pedida (`/privacidade`), não com o arquivo (`privacidade.html`). A regra `**/*.html` sozinha não pega as páginas, que saíam com `max-age=3600`. Por isso cada rota tem a própria regra `max-age=0, must-revalidate`. `scripts/serve.mjs` (usado no axe e no Lighthouse) casa pela URL pedida, como o Firebase. A 404 (qualquer URL inexistente) não dá para cobrir por glob.

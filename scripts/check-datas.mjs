@@ -4,7 +4,9 @@
 //     campos inválidos, sites, ativo, forcar e ?tema=;
 //  2. no dist/: nenhum link nem o sitemap com ?tema=;
 //  3. no Chromium, sobre o dist/: tema antes da pintura, ícones da data, ?tema= com noindex e canonical limpo,
-//     nenhuma violação de CSP nem erro na página.
+//     nenhuma violação de CSP nem erro na página;
+//  4. o visual: enfeites e dupla sem cobrir texto, links nem botões (360 a 1440 px), sem rolagem lateral; imagens da
+//     data só baixadas com a data ativa (e só as dela, claro ou escuro); reduzir movimento deixa tudo parado.
 import vm from 'node:vm';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -205,6 +207,100 @@ const info = (page) =>
   await ctx.close();
 }
 
+// ---------- 4. Visual ----------
+
+/** Pedidos a /datas/ durante a visita. */
+async function visitar(url, { quando = new Date(2026, 9, 25, 12), width = 1280, scheme = 'light', reduced = 'no-preference', init } = {}) {
+  const ctx = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: scheme, reducedMotion: reduced });
+  const page = await ctx.newPage();
+  const pedidos = [];
+  const problemas = [];
+  page.on('request', (r) => {
+    const u = new URL(r.url());
+    if (u.pathname.startsWith('/datas/')) pedidos.push(u.pathname);
+  });
+  page.on('console', (m) => m.type() === 'error' && problemas.push(m.text()));
+  page.on('pageerror', (e) => problemas.push(String(e)));
+  if (init) await page.addInitScript(...init);
+  await page.clock.setFixedTime(quando);
+  await page.goto(base + url, { waitUntil: 'networkidle' });
+  return { ctx, page, pedidos, problemas };
+}
+
+// Imagens só quando a data está ativa, e só as da data (e do esquema de cor).
+{
+  const v = await visitar('/?tema=nenhum');
+  eq('sem tema: nada de /datas/ baixado', v.pedidos, []);
+  await v.ctx.close();
+}
+{
+  const v = await visitar('/');
+  const esperado = ['/datas/halloween/dupla-claro.svg', '/datas/halloween/fantasminha.svg', '/datas/halloween/icone.svg'];
+  eq('Halloween claro: só as imagens dele', [...new Set(v.pedidos)].filter((p) => !p.endsWith('.png')).sort(), esperado);
+  for (const p of v.problemas) errors.push(`Halloween: ${p}`);
+  await v.ctx.close();
+}
+{
+  const v = await visitar('/en', { quando: new Date(2026, 11, 2, 12), scheme: 'dark' });
+  const esperado = ['/datas/natal/dupla-escuro.svg', '/datas/natal/guirlanda.svg', '/datas/natal/icone.svg'];
+  eq('Natal escuro: só as imagens dele', [...new Set(v.pedidos)].filter((p) => !p.endsWith('.png')).sort(), esperado);
+  for (const p of v.problemas) errors.push(`Natal: ${p}`);
+  await v.ctx.close();
+}
+{
+  const semEnfeites = JSON.stringify({ temas: { halloween: { inicio: '10-24', fim: '10-31', enfeites: false, icone: true, sites: ['pawta'] } } });
+  const v = await visitar('/', { init: [([k, v]) => localStorage.setItem(k, v), [CHAVES.config, semEnfeites]] });
+  eq('enfeites: false não baixa fantasminha', v.pedidos.includes('/datas/halloween/fantasminha.svg'), false);
+  eq('enfeites: false mantém a dupla', v.pedidos.includes('/datas/halloween/dupla-claro.svg'), true);
+  await v.ctx.close();
+}
+
+// Movimento: anima normalmente; parado com "reduzir movimento".
+for (const [reduced, quer] of [['no-preference', true], ['reduce', false]]) {
+  for (const [tema, sel, pseudo] of [['halloween', '.fantasma-data', null], ['natal', '.guirlanda-data', '::before']]) {
+    const v = await visitar(`/?tema=${tema}`, { reduced });
+    const nome = await v.page.evaluate(([s, p]) => getComputedStyle(document.querySelector(s), p).animationName, [sel, pseudo]);
+    eq(`${tema}, ${reduced}: animação`, nome !== 'none', quer);
+    await v.ctx.close();
+  }
+}
+
+// Enfeites nunca cobrem texto, links nem botões; a página não ganha rolagem lateral.
+const sobreposicoes = () => {
+  const enfeites = [...document.querySelectorAll('.fantasma-data, .dupla-data, .guirlanda-data')]
+    .map((el) => el.getBoundingClientRect())
+    .filter((r) => r.width && r.height);
+  const alvos = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  while (walker.nextNode()) {
+    const n = walker.currentNode;
+    if (!n.textContent.trim() || !n.parentElement || n.parentElement.closest('.faixa-data, .sr-only, script, style')) continue;
+    const range = document.createRange();
+    range.selectNodeContents(n);
+    for (const r of range.getClientRects()) if (r.width && r.height) alvos.push({ r, o: `texto "${n.textContent.trim().slice(0, 24)}"` });
+  }
+  for (const el of document.querySelectorAll('a, button, summary')) {
+    const r = el.getBoundingClientRect();
+    if (r.width && r.height) alvos.push({ r, o: `<${el.tagName.toLowerCase()}> ${(el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 24)}` });
+  }
+  const cruza = (a, b) => a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1;
+  const achados = [];
+  for (const e of enfeites) for (const { r, o } of alvos) if (cruza(e, r)) achados.push(o);
+  return { achados: [...new Set(achados)], lateral: document.documentElement.scrollWidth > innerWidth, enfeites: enfeites.length };
+};
+for (const tema of ['halloween', 'natal']) {
+  for (const width of [360, 390, 768, 900, 1024, 1280, 1440]) {
+    for (const url of ['/', '/en']) {
+      const v = await visitar(`${url}?tema=${tema}`, { width, reduced: 'reduce' });
+      const r = await v.page.evaluate(sobreposicoes);
+      if (r.enfeites < (tema === 'halloween' ? 3 : 1)) errors.push(`${url} ${tema} ${width}px: só ${r.enfeites} enfeites visíveis`);
+      for (const o of r.achados) errors.push(`${url} ${tema} ${width}px: enfeite cobre ${o}`);
+      if (r.lateral) errors.push(`${url} ${tema} ${width}px: rolagem lateral`);
+      await v.ctx.close();
+    }
+  }
+}
+
 await browser.close();
 server.close();
-report('datas: escolha do tema (datas, virada do ano, JSON, sites, ativo, forcar, ?tema=) e no navegador', errors);
+report('datas: escolha do tema (datas, virada do ano, JSON, sites, ativo, forcar, ?tema=), navegador, imagens, movimento e enfeites sem cobrir nada', errors);

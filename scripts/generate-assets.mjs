@@ -1,8 +1,9 @@
 // Gera, a partir do Toski DS (@toski-labs/ds), o que o site precisa fora do HTML:
 //   public/favicon.svg, apple-touch-icon.png, icon-192.png, icon-512.png  (ícone do app)
 //   public/og/og-pt.png, og-en.png                                         (cards de compartilhamento 1200 × 630)
+//   public/datas/<tema>/apple-touch-icon.png                                (ícone da data, de public/datas/<tema>/icone.svg)
 // Roda em predev e prebuild. A saída fica no .gitignore: a fonte é o DS.
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import sharp from 'sharp';
@@ -24,6 +25,14 @@ const iconPng = await readFile(path.join(ds, 'products/pawta/icon/pawta-icon-lig
 for (const [name, size] of [['apple-touch-icon.png', 180], ['icon-192.png', 192], ['icon-512.png', 512]]) {
   // O ícone é quadrado e opaco (o iOS exige isso no apple-touch-icon); o redimensionamento descarta o metadata C2PA.
   await sharp(iconPng).resize(size, size).flatten().png({ compressionLevel: 9 }).toFile(path.join(pub, name));
+}
+
+// Ícones das datas especiais (apple-touch-icon 180 px, quadrado e opaco), a partir do SVG versionado de cada data.
+for (const tema of await readdir(path.join(pub, 'datas'))) {
+  const svg = await readFile(path.join(pub, 'datas', tema, 'icone.svg'), 'utf8').catch(() => null);
+  if (!svg) continue;
+  const png = new Resvg(svg, { fitTo: { mode: 'width', value: 180 } }).render().asPng();
+  await sharp(png).flatten().png({ compressionLevel: 9, palette: true }).toFile(path.join(pub, 'datas', tema, 'apple-touch-icon.png'));
 }
 
 // Cards de compartilhamento
@@ -61,4 +70,4 @@ for (const lang of ['pt', 'en']) {
   const png = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
   await writeFile(path.join(pub, 'og', `og-${lang}.png`), png);
 }
-console.log('assets: ícones e cards OG gerados em public/');
+console.log('assets: ícones, ícones das datas e cards OG gerados em public/');
