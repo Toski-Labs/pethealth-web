@@ -3,6 +3,7 @@ import '../styles/global.css';
 import outfitLatin from '@fontsource-variable/outfit/files/outfit-latin-wght-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import DatasRemoteConfig from '../components/datas/DatasRemoteConfig.astro';
 import { themeScript } from '../lib/theme-script.mjs';
 import { ORG_ID } from '../lib/schema';
 import { alternatePath, APP_STORE_ID, getLang, routes, SUPPORT_EMAIL, useTranslations, type PageKey } from '../i18n/ui';
@@ -115,5 +116,6 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': noin
       <slot />
     </main>
     <Footer />
+    <DatasRemoteConfig />
   </body>
 </html>

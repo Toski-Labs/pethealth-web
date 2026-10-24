@@ -40,7 +40,9 @@ export default defineConfig({
         "img-src 'self' data:",
         "font-src 'self'",
         "manifest-src 'self'",
-        "connect-src 'self'", // o Lighthouse baixa o robots.txt de dentro da página; sem isso o SEO perde pontos
+        // 'self': o Lighthouse baixa o robots.txt de dentro da página; sem isso o SEO perde pontos.
+        // googleapis: Remote Config das datas especiais (src/components/datas/DatasRemoteConfig.astro).
+        "connect-src 'self' https://firebaseinstallations.googleapis.com https://firebaseremoteconfig.googleapis.com",
         "base-uri 'none'",
         "form-action 'none'",
       ],

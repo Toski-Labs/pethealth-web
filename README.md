@@ -4,7 +4,7 @@ Site do app Pawta, da Toski Labs: https://pawta.toski-labs.com.br
 
 O app se chamava PetHealthTracker. O endereço antigo, `pethealth.toski-labs.com.br`, responde 301 para a mesma página no novo.
 
-Estático, em português e inglês, sem cookies, analytics nem scripts de terceiros.
+Estático, em português e inglês, sem cookies nem analytics. O único código de terceiros é o Firebase Remote Config das datas especiais (Halloween, Natal), baixado depois da página carregar e no máximo a cada 12 h; veja [`docs/PLANO.md`](docs/PLANO.md) › Datas especiais.
 
 ## Stack
 

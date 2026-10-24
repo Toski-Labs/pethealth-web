@@ -33,6 +33,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "@toski-labs/ds": "0.6.0",
     "astro": "^7.3.5",
+    "firebase": "^12.19.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
     "tailwindcss": "^4.3.3"

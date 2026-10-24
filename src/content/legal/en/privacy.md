@@ -1,7 +1,7 @@
 ---
 title: Privacy Policy
 lead: Your data and your pets’ data belong to you. Here’s what Pawta keeps, why, and what you can do about it, in plain words.
-updated: "October 6, 2026"
+updated: "October 24, 2026"
 ---
 
 ## Who we are
@@ -67,6 +67,8 @@ The Pawta website (pawta.toski-labs.com.br) has no sign-in and uses no cookies, 
 
 - **Your preferences**
   The theme and language you choose are saved only in your browser, so the site remembers them next time. They never leave your device.
+- **Special dates**
+  To know when to show the look for dates like Halloween and Christmas, the site checks Firebase Remote Config (Google) at most twice a day, after the page loads. For that, Firebase creates a technical identifier in your browser, with no link to you or to your app account. The answer is saved only in your browser.
 - **Hosting**
   The site runs on Firebase Hosting (Google), which may log technical access data, such as your IP address, for security and to keep the site running.
 
