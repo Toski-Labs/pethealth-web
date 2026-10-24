@@ -9,7 +9,7 @@ export function mobileApplication(site: URL, url: string, description: string) {
   return {
     '@type': 'MobileApplication',
     '@id': new URL('/#app', site).href,
-    name: 'PetHealthTracker',
+    name: 'Pawta',
     url,
     description,
     operatingSystem: 'iOS 18.0 or later',

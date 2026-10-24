@@ -1,11 +1,11 @@
 ---
-/** "PetHealthTracker", com "Tracker" na cor de destaque (Índigo no claro, lilás no escuro). */
+/** "Pawta", com "ta" na cor de destaque (Índigo no claro, lilás no escuro), no mesmo padrão do Koti. */
 interface Props {
   class?: string;
-  /** Rodapé: fundo sempre escuro, então "Tracker" fica no lilás do produto. */
+  /** Rodapé: fundo sempre escuro, então "ta" fica no lilás do produto. */
   onDark?: boolean;
 }
 const { class: className, onDark = false } = Astro.props;
 ---
 
-<span class:list={['font-semibold tracking-[-0.01em]', className]}>PetHealth<span class:list={[onDark ? 'text-footer-accent' : 'text-accent-text']}>Tracker</span></span>
+<span class:list={['font-semibold tracking-[-0.01em]', className]}>Paw<span class:list={[onDark ? 'text-footer-accent' : 'text-accent-text']}>ta</span></span>

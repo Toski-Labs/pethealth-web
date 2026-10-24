@@ -7,7 +7,7 @@ import react from '@astrojs/react';
 import { createHash } from 'node:crypto';
 import { themeScript } from './src/lib/theme-script.mjs';
 
-const SITE = 'https://pethealth.toski-labs.com.br';
+const SITE = 'https://pawta.toski-labs.com.br';
 
 // Mesma página em PT e EN (espelha src/i18n/ui.ts › routes). Usado no sitemap.
 const pagePairs = [

@@ -1,7 +1,7 @@
 // Links internos (npm run check:links): todo href/src interno aponta para um arquivo de dist/ e, se tiver #âncora, o id existe na página.
 import { access } from 'node:fs/promises';
 import path from 'node:path';
-import { dist, loadPages, pages, report } from './lib.mjs';
+import { dist, loadPages, pages, report, SITE } from './lib.mjs';
 
 const errors = [];
 const loaded = await loadPages();
@@ -29,7 +29,7 @@ for (const page of loaded) {
 // Sitemap: lista as 6 páginas indexáveis e não a 404.
 const sm = await (await import('node:fs/promises')).readFile(path.join(dist, 'sitemap-0.xml'), 'utf8');
 for (const p of pages) {
-  const loc = `https://pethealth.toski-labs.com.br${p.url === '/' ? '/' : p.url}`;
+  const loc = `${SITE}${p.url === '/' ? '/' : p.url}`;
   if (p.noindex ? sm.includes(`<loc>${loc}</loc>`) : !sm.includes(`<loc>${loc}</loc>`)) errors.push(`sitemap: ${p.noindex ? 'contém' : 'não contém'} ${loc}`);
 }
 report(`links internos: ${loaded.length} páginas`, errors);

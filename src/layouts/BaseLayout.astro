@@ -30,8 +30,8 @@ const enUrl = lang === 'en' ? canonical : alternate;
 const ogImage = new URL(`/og/og-${lang}.png`, site);
 const ogAlt =
   lang === 'pt'
-    ? 'PetHealthTracker: o cachorro e o gato do app e o texto “Vacinas, remédios e lembretes do seu pet, tudo num lugar só.”'
-    : 'PetHealthTracker: the app’s dog and cat and the text “Your pet’s vaccines, medicines and reminders, all in one place.”';
+    ? 'Pawta: o cachorro e o gato do app e o texto “Vacinas, remédios e lembretes do seu pet, tudo num lugar só.”'
+    : 'Pawta: the app’s dog and cat and the text “Your pet’s vaccines, medicines and reminders, all in one place.”';
 
 // Dados estruturados (schema.org). Não aparecem na tela.
 const orgId = ORG_ID;
@@ -46,7 +46,7 @@ const organization = {
 const website = {
   '@type': 'WebSite',
   '@id': new URL('/#website', site).href,
-  name: 'PetHealthTracker',
+  name: 'Pawta',
   url: new URL('/', site).href,
   inLanguage: ['pt-BR', 'en'],
   publisher: { '@id': orgId },
@@ -55,7 +55,7 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': noin
 ---
 
 <!doctype html>
-<html lang={lang === 'pt' ? 'pt-BR' : 'en'} data-product="pethealth">
+<html lang={lang === 'pt' ? 'pt-BR' : 'en'} data-product="pawta">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -86,7 +86,7 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': noin
     {APP_STORE_ID && <meta name="apple-itunes-app" content={`app-id=${APP_STORE_ID}`} />}
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="PetHealthTracker" />
+    <meta property="og:site_name" content="Pawta" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />

@@ -6,7 +6,7 @@ import { parse } from 'node-html-parser';
 
 export const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 export const dist = path.join(root, 'dist');
-export const SITE = 'https://pethealth.toski-labs.com.br';
+export const SITE = 'https://pawta.toski-labs.com.br';
 
 /** As 7 páginas: arquivo em dist/ → endereço público. */
 export const pages = [

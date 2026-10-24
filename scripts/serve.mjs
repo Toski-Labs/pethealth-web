@@ -6,8 +6,9 @@ import { gzipSync } from 'node:zlib';
 import path from 'node:path';
 import { dist, root } from './lib.mjs';
 
-// Cabeçalhos do firebase.json (cache e segurança), para o Lighthouse medir como no ar.
-const rules = JSON.parse(await readFile(path.join(root, 'firebase.json'), 'utf8')).hosting.headers.map((h) => ({
+// Cabeçalhos do site "pawta" no firebase.json (cache e segurança), para o Lighthouse medir como no ar.
+const { hosting } = JSON.parse(await readFile(path.join(root, 'firebase.json'), 'utf8'));
+const rules = hosting.find((h) => h.target === 'pawta').headers.map((h) => ({
   re: new RegExp(
     '^' +
       h.source
