@@ -6,8 +6,10 @@ import react from '@astrojs/react';
 
 import { createHash } from 'node:crypto';
 import { themeScript } from './src/lib/theme-script.mjs';
+import { datasScript } from './src/lib/datas-especiais.mjs';
 
 const SITE = 'https://pawta.toski-labs.com.br';
+const sha256 = (/** @type {string} */ s) => createHash('sha256').update(s).digest('base64');
 
 // Mesma página em PT e EN (espelha src/i18n/ui.ts › routes). Usado no sitemap.
 const pagePairs = [
@@ -33,8 +35,8 @@ export default defineConfig({
   // por hash: scripts/csp.mjs falha o build se algum HTML gerado tiver um.
   security: {
     csp: {
-      // O script do tema é inline (is:inline) e o Astro não calcula o hash dele: entra aqui.
-      scriptDirective: { hashes: [`sha256-${createHash('sha256').update(themeScript).digest('base64')}`] },
+      // Os scripts do tema e das datas especiais são inline (is:inline) e o Astro não calcula o hash deles: entram aqui.
+      scriptDirective: { hashes: [`sha256-${sha256(themeScript)}`, `sha256-${sha256(datasScript)}`] },
       directives: [
         "default-src 'none'",
         "img-src 'self' data:",

@@ -5,6 +5,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import DatasRemoteConfig from '../components/datas/DatasRemoteConfig.astro';
 import { themeScript } from '../lib/theme-script.mjs';
+import { datasScript } from '../lib/datas-especiais.mjs';
 import { ORG_ID } from '../lib/schema';
 import { alternatePath, APP_STORE_ID, getLang, routes, SUPPORT_EMAIL, useTranslations, type PageKey } from '../i18n/ui';
 
@@ -79,6 +80,8 @@ const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': noin
     <link rel="preload" href={outfitLatin} as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Data especial (Halloween, Natal): escolhida antes da pintura; troca os ícones acima. Ver src/lib/datas-especiais.mjs. -->
+    <script is:inline set:html={datasScript} />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#F7F1E8" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#231B17" media="(prefers-color-scheme: dark)" />
