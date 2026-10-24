@@ -1,0 +1,224 @@
+/*
+  Datas especiais (Halloween, Natal). O script do <head> (src/lib/datas-especiais.mjs) marca o <html> com
+  data-tema, data-tema-enfeites e data-tema-icone antes da pintura. Sem tema, nada daqui aparece nem é baixado:
+  as ilustrações (public/datas/<tema>/) são background-image, que o navegador só pede quando a regra vale.
+  Enfeites nunca cobrem texto nem botões: ficam no topo e nas bordas do círculo do hero (scripts/check-datas.mjs confere).
+  Fora de @layer de propósito: o "esconder" daqui precisa vencer os utilitários (inline-block etc.) das mesmas peças.
+*/
+
+/* TODO(ds): cores das datas especiais (canvas, aba "Datas especiais"); o DS ainda não tem tokens sazonais. */
+:root {
+  --data-noite: #2b2340;
+  --data-abobora: #e8873a;
+  --data-natal: #c8402e;
+  --data-natal-texto: #ffffff;
+  --data-hero-halloween: #e3dcf0;
+  --data-hero-natal: #f6e3df;
+}
+
+.faixa-data,
+.faixa-data > p,
+.guirlanda-data,
+.icone-data,
+.dupla-data,
+.fantasma-data {
+  display: none;
+}
+
+/* Faixa no topo */
+html[data-tema] .faixa-data {
+  display: block;
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+html[data-tema="halloween"] .faixa-data {
+  background: var(--data-noite);
+  color: var(--data-abobora);
+}
+html[data-tema="natal"] .faixa-data {
+  background: var(--data-natal);
+  color: var(--data-natal-texto);
+}
+html[data-tema="halloween"] .faixa-data > [data-tema-so="halloween"],
+html[data-tema="natal"] .faixa-data > [data-tema-so="natal"] {
+  display: block;
+}
+.faixa-data > p::after {
+  content: " " var(--tema-fim) ".";
+}
+
+/* Guirlanda (Natal), entre a faixa e o cabeçalho. No celular, recorta o meio da guirlanda. */
+html[data-tema="natal"][data-tema-enfeites] .guirlanda-data {
+  display: block;
+  height: clamp(72px, 8.75vw, 112px);
+  overflow: clip;
+  pointer-events: none;
+}
+.guirlanda-data::before {
+  content: "";
+  display: block;
+  height: 100%;
+  background: url("/datas/natal/guirlanda.svg") center top / cover no-repeat;
+  transform-origin: 50% 0;
+  animation: data-balanca 4s ease-in-out infinite;
+}
+
+/* Ícone da data no lugar do ícone do app (cabeçalho e topo da Home) */
+html[data-tema-icone] .icone-app {
+  display: none;
+}
+html[data-tema-icone] .icone-data {
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: 22%;
+  background: center / cover no-repeat;
+}
+html[data-tema-icone][data-tema="halloween"] .icone-data {
+  background-image: url("/datas/halloween/icone.svg");
+}
+html[data-tema-icone][data-tema="natal"] .icone-data {
+  background-image: url("/datas/natal/icone.svg");
+}
+
+/*
+  Hero da Home: a dupla fantasiada senta na borda de baixo do círculo, o cachorro à esquerda e o gato à direita do
+  celular, olhando para ele. É a mesma ilustração cortada ao meio (background-size 200%); a beirada de cada metade
+  (e o meio do coração) fica atrás da moldura do celular, que vem depois no HTML e é position: relative, sem cobrir
+  a tela. Medidas em cqw: o contêiner .hero-arte tem a largura do círculo.
+  --meio-celular: meia largura do celular (300 px; 240 px no celular, com zoom 0.8).
+  --folga-dupla: quanto a metade pode passar da borda do círculo; menos que a margem da página, senão a página
+  ganha rolagem lateral (scripts/check-datas.mjs confere de 360 a 1440 px).
+*/
+.hero-arte {
+  container-type: inline-size;
+  --meio-celular: 150px;
+  --folga-dupla: 16px;
+}
+@media (width < 40rem) {
+  .hero-arte {
+    --meio-celular: 120px;
+  }
+}
+@media (width >= 80rem) {
+  .hero-arte {
+    --folga-dupla: 56px;
+  }
+}
+html[data-tema="halloween"] {
+  --dupla-data: url("/datas/halloween/dupla-claro.svg");
+}
+html[data-tema="natal"] {
+  --dupla-data: url("/datas/natal/dupla-claro.svg");
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"])[data-tema="halloween"] {
+    --dupla-data: url("/datas/halloween/dupla-escuro.svg");
+  }
+  html:not([data-theme="light"])[data-tema="natal"] {
+    --dupla-data: url("/datas/natal/dupla-escuro.svg");
+  }
+}
+html[data-theme="dark"][data-tema="halloween"] {
+  --dupla-data: url("/datas/halloween/dupla-escuro.svg");
+}
+html[data-theme="dark"][data-tema="natal"] {
+  --dupla-data: url("/datas/natal/dupla-escuro.svg");
+}
+html[data-tema] .dupla-data {
+  display: block;
+  position: absolute;
+  bottom: calc(50% - 50cqw);
+  width: clamp(48px, calc(50cqw - var(--meio-celular) + var(--folga-dupla)), 120px);
+  aspect-ratio: 215 / 260;
+  background: var(--dupla-data) no-repeat;
+  background-size: 200% 100%;
+  pointer-events: none;
+}
+html[data-tema] .dupla-data.cachorro {
+  right: calc(50cqw + var(--meio-celular) - 10px);
+  background-position: left bottom;
+}
+html[data-tema] .dupla-data.gato {
+  left: calc(50cqw + var(--meio-celular) - 10px);
+  background-position: right bottom;
+}
+/* Do tablet em diante, com o círculo quase da largura do celular (≈ 768–830 px), não cabe: a dupla sai. */
+@media (width >= 40rem) {
+  @container (width < 340px) {
+    html[data-tema] .dupla-data {
+      display: none;
+    }
+  }
+}
+/* Círculo do hero no tom da data (só no claro; no escuro fica o de sempre). */
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="dark"])[data-tema="halloween"] .circulo-hero {
+    background: var(--data-hero-halloween);
+  }
+  html:not([data-theme="dark"])[data-tema="natal"] .circulo-hero {
+    background: var(--data-hero-natal);
+  }
+}
+html[data-theme="light"][data-tema="halloween"] .circulo-hero {
+  background: var(--data-hero-halloween);
+}
+html[data-theme="light"][data-tema="natal"] .circulo-hero {
+  background: var(--data-hero-natal);
+}
+
+/* Fantasminhas (Halloween) flutuando nos cantos de cima do círculo, fora do celular. */
+html[data-tema="halloween"][data-tema-enfeites] .fantasma-data {
+  display: block;
+  position: absolute;
+  aspect-ratio: 40 / 46;
+  background: url("/datas/halloween/fantasminha.svg") center / contain no-repeat;
+  pointer-events: none;
+  animation: data-flutua 3.2s ease-in-out infinite;
+}
+.fantasma-data.f1 {
+  width: clamp(36px, 10.5cqw, 48px);
+  right: -2cqw;
+  top: calc(50% - 46cqw);
+}
+.fantasma-data.f2 {
+  width: clamp(24px, 6.5cqw, 30px);
+  left: 4cqw;
+  top: calc(50% - 40cqw);
+  opacity: 0.9;
+  animation-delay: -1.1s;
+}
+.fantasma-data.f3 {
+  width: clamp(18px, 4.8cqw, 22px);
+  right: 2cqw;
+  top: calc(50% - 20cqw);
+  opacity: 0.8;
+  animation-delay: -2.2s;
+}
+
+@keyframes data-flutua {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(4deg);
+  }
+}
+@keyframes data-balanca {
+  0%,
+  100% {
+    transform: rotate(-1.2deg);
+  }
+  50% {
+    transform: rotate(1.2deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fantasma-data,
+  .guirlanda-data::before {
+    animation: none !important;
+  }
+}

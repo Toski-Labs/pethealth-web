@@ -1,0 +1,15 @@
+---
+/**
+ * Topo das datas especiais: a faixa com o texto da data (PT/EN, o fim vem de --tema-fim) e, no Natal, a guirlanda.
+ * Escondidos sem tema; quem mostra é o CSS (src/styles/datas.css) a partir do data-tema do <html>.
+ */
+import { getLang, useTranslations } from '../../i18n/ui';
+
+const t = useTranslations(getLang(Astro.currentLocale));
+---
+
+<aside class="faixa-data" aria-label={t('datas.label')}>
+  <p data-tema-so="halloween">{t('datas.halloween')}</p>
+  <p data-tema-so="natal">{t('datas.natal')}</p>
+</aside>
+<div class="guirlanda-data" aria-hidden="true"></div>

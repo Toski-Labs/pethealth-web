@@ -1,0 +1,64 @@
+---
+/**
+ * Atualiza, para a próxima visita, o calendário das datas especiais (Remote Config, parâmetro `datas_especiais`).
+ *
+ * Não muda nada na página aberta: quem escolhe o tema é o script do <head>, antes da pintura, com o padrão
+ * embutido e o último valor guardado aqui. Por isso o Firebase só é baixado depois do load, com o navegador
+ * ocioso, e no máximo a cada 12 h. Se o Remote Config falhar ou demorar, fica o que estava guardado (ou o padrão).
+ * Só consulta no endereço publicado (e no npm run dev): no preview local, no axe e no Lighthouse, não.
+ */
+---
+
+<script>
+  import { CHAVES } from '../../lib/datas-especiais.mjs';
+  import { DATAS_PARAM, firebaseConfig } from '../../lib/firebase';
+
+  const INTERVALO = 12 * 60 * 60 * 1000;
+  const publicado = /(^|\.)toski-labs\.com\.br$|\.web\.app$/.test(location.hostname) || import.meta.env.DEV;
+
+  const ler = (chave: string) => {
+    try {
+      return localStorage.getItem(chave);
+    } catch {
+      return null;
+    }
+  };
+  const gravar = (chave: string, valor: string | null) => {
+    try {
+      if (valor === null) localStorage.removeItem(chave);
+      else localStorage.setItem(chave, valor);
+    } catch {
+      /* navegação privada: segue com o padrão */
+    }
+  };
+
+  async function atualizar() {
+    // Marca a tentativa antes de buscar: se falhar, tenta de novo só daqui a 12 h.
+    gravar(CHAVES.lidoEm, String(Date.now()));
+    try {
+      const [{ initializeApp }, rc] = await Promise.all([import('firebase/app'), import('firebase/remote-config')]);
+      const remoteConfig = rc.getRemoteConfig(initializeApp(firebaseConfig));
+      remoteConfig.settings.minimumFetchIntervalMillis = import.meta.env.DEV ? 0 : INTERVALO;
+      remoteConfig.settings.fetchTimeoutMillis = 4000;
+      remoteConfig.defaultConfig = { [DATAS_PARAM]: '' };
+      await rc.fetchAndActivate(remoteConfig);
+      const valor = rc.getValue(remoteConfig, DATAS_PARAM);
+      // Parâmetro apagado no console: volta ao padrão embutido. JSON quebrado não é guardado (o script do <head> também confere).
+      if (valor.getSource() !== 'remote') gravar(CHAVES.config, null);
+      else {
+        const texto = valor.asString();
+        JSON.parse(texto);
+        gravar(CHAVES.config, texto);
+      }
+    } catch {
+      // Sem resposta ou JSON inválido: fica o que estava guardado.
+    }
+  }
+
+  const ultima = Number(ler(CHAVES.lidoEm)) || 0;
+  if (publicado && Date.now() - ultima >= INTERVALO) {
+    const ocioso = () => ('requestIdleCallback' in window ? requestIdleCallback(() => atualizar(), { timeout: 10000 }) : setTimeout(atualizar, 2000));
+    if (document.readyState === 'complete') ocioso();
+    else addEventListener('load', ocioso, { once: true });
+  }
+</script>

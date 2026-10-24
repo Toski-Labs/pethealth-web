@@ -9,6 +9,7 @@
 */
 @import "@toski-labs/ds/tailwind.css";
 @import "@toski-labs/ds/themes/pawta.css";
+@import "./datas.css";
 
 /*
   TODO(ds): tokens que o DS 0.5.3 ainda não entrega para a web. Cada variável abaixo tem o nome do token

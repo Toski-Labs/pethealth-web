@@ -1,7 +1,8 @@
 // Confere a Content-Security-Policy do HTML gerado (npm run check:csp, parte do npm run ci):
 //  1. nenhum atributo style="…" (nem on*="…" ou javascript:): hashes da CSP não cobrem atributos, e não liberamos 'unsafe-inline';
 //  2. cada <script> e <style> inline tem o hash na <meta http-equiv="content-security-policy">;
-//  3. nenhum script de outra origem, e nada além do script do tema, do menu de configurações e (no Suporte) do copiar e-mail.
+//  3. nenhum script de outra origem, e nada além dos scripts do <head> (tema e data especial), do menu de configurações,
+//     do Remote Config das datas especiais e (no Suporte) do copiar e-mail.
 import { createHash } from 'node:crypto';
 import { loadPages, report } from './lib.mjs';
 
@@ -49,10 +50,11 @@ for (const page of await loadPages()) {
     if (/^(https?:)?\/\//.test(u)) errors.push(`${where}: recurso de outra origem: ${u}`);
   }
 
-  // 3. Quanto JS: o script do tema (inline) + o do menu de configurações; nada mais.
-  // No Suporte entra um terceiro: copiar e-mail e fechar o menu do e-mail.
+  // 3. Quanto JS: os do <head> (tema e data especial, inline), o do menu de configurações e o do Remote Config das
+  // datas especiais (/_astro/DatasRemoteConfig…, que só baixa o Firebase depois do load); nada mais.
+  // No Suporte entra mais um: copiar e-mail e fechar o menu do e-mail.
   const executable = page.root.querySelectorAll('script').filter((s) => s.getAttribute('type') !== 'application/ld+json');
-  const allowed = /\/(suporte|support)$/.test(page.url) ? 3 : 2;
+  const allowed = /\/(suporte|support)$/.test(page.url) ? 5 : 4;
   if (executable.length > allowed) errors.push(`${where}: ${executable.length} scripts (esperado até ${allowed})`);
 }
-report('csp: sem style= inline, hashes completos, tema + menu (+ copiar e-mail no Suporte)', errors);
+report('csp: sem style= inline, hashes completos, tema + menu + datas especiais (+ copiar e-mail no Suporte)', errors);

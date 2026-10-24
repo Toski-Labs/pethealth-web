@@ -4,7 +4,7 @@ Site do app Pawta, da Toski Labs: https://pawta.toski-labs.com.br
 
 O app se chamava PetHealthTracker. O endereço antigo, `pethealth.toski-labs.com.br`, responde 301 para a mesma página no novo.
 
-Estático, em português e inglês, sem cookies, analytics nem scripts de terceiros.
+Estático, em português e inglês, sem cookies nem analytics. O único código de terceiros é o Firebase Remote Config das datas especiais (Halloween, Natal), baixado depois da página carregar e no máximo a cada 12 h; veja [`docs/PLANO.md`](docs/PLANO.md) › Datas especiais.
 
 ## Stack
 
@@ -28,7 +28,7 @@ Precisa de Node 22.12 ou mais novo.
 | `npm run deploy:redirect`  | Publica os 301 do endereço antigo, site `pethealth` (só quando você rodar) |
 | `npm run ci`               | Tudo o que precisa passar antes de um PR (veja abaixo)            |
 
-`npm run ci` roda: `astro check`, build, `check:csp` (sem `style=` inline, hashes da CSP), `check:seo` (inclui o sitemap: exatamente as 6 páginas, nenhum `.xml`), `check:links`, `check:redirects` (os 301 do site antigo no `firebase.json`), `check:jsonld`, axe e Lighthouse CI. Na primeira vez, `npx playwright install chromium`.
+`npm run ci` roda: `astro check`, build, `check:csp` (sem `style=` inline, hashes da CSP), `check:seo` (inclui o sitemap: exatamente as 6 páginas, nenhum `.xml`), `check:links`, `check:redirects` (os 301 do site antigo no `firebase.json`), `check:cache` (`no-cache` em tudo, menos `/_astro/`, com cache longo), `check:jsonld`, axe e Lighthouse CI. Na primeira vez, `npx playwright install chromium`.
 
 O deploy é manual (`npm run deploy` e `npm run deploy:redirect`, com `firebase login` feito antes); este repositório não faz deploy no CI.
 

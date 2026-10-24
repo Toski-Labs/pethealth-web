@@ -43,6 +43,10 @@ export const ui = {
     'footer.lab': 'Um app da Toski Labs',
     'footer.help': 'Ajuda',
     'skip': 'Pular para o conteúdo',
+    // Faixa das datas especiais: o fim da data ("31 de outubro.") vem do CSS (--tema-fim, src/lib/datas-especiais.mjs).
+    'datas.label': 'Data especial',
+    'datas.halloween': 'Halloween no Pawta: a dupla se fantasiou. Até',
+    'datas.natal': 'Boas festas! A dupla está de gorrinho até',
   },
   en: {
     'site.name': 'Pawta',
@@ -66,6 +70,9 @@ export const ui = {
     'footer.lab': 'An app by Toski Labs',
     'footer.help': 'Help',
     'skip': 'Skip to content',
+    'datas.label': 'Special date',
+    'datas.halloween': 'Halloween at Pawta: the pair dressed up. Until',
+    'datas.natal': 'Happy holidays! The pair is wearing Santa hats until',
   },
 } as const;
 

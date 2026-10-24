@@ -103,7 +103,8 @@ const t = {
 <!-- Topo -->
 <section aria-labelledby="inicio-titulo" class="page flex flex-wrap items-center gap-10 pt-4 pb-16 sm:pt-8 md:flex-nowrap md:gap-14 md:pb-24">
   <div class="flex min-w-0 flex-[1_1_360px] flex-col gap-5 sm:gap-5.5">
-    <Art items={appIcon('hero', 96)} class="shrink-0 self-start overflow-hidden rounded-[22%] [&_svg]:size-16 sm:[&_svg]:size-24" />
+    <Art items={appIcon('hero', 96)} class="icone-app shrink-0 self-start overflow-hidden rounded-[22%] [&_svg]:size-16 sm:[&_svg]:size-24" />
+    <span class="icone-data size-16 self-start sm:size-24" aria-hidden="true"></span>
     <div class="flex flex-col gap-3">
       <h1 id="inicio-titulo" class="text-[clamp(40px,5.2vw,64px)] leading-[1.04] font-semibold tracking-tight [overflow-wrap:anywhere] max-[359px]:text-[34px]">
         Paw<span class="text-accent-text">ta</span>
@@ -121,8 +122,14 @@ const t = {
     <p class="text-sm text-muted">{t.requirement}</p>
   </div>
   <div class="flex min-w-0 flex-[1_1_300px] justify-center">
-    <div class="relative flex w-full max-w-115 justify-center py-7 max-sm:py-4">
-      <div class="absolute top-1/2 left-1/2 aspect-square w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-hero" aria-hidden="true"></div>
+    <div class="hero-arte relative flex w-full max-w-115 justify-center py-7 max-sm:py-4">
+      <div class="circulo-hero absolute top-1/2 left-1/2 aspect-square w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-hero" aria-hidden="true"></div>
+      <!-- Datas especiais (src/styles/datas.css): dupla fantasiada e fantasminhas, só com tema. -->
+      <span class="dupla-data cachorro" aria-hidden="true"></span>
+      <span class="dupla-data gato" aria-hidden="true"></span>
+      <span class="fantasma-data f1" aria-hidden="true"></span>
+      <span class="fantasma-data f2" aria-hidden="true"></span>
+      <span class="fantasma-data f3" aria-hidden="true"></span>
       <PhoneMock class="max-sm:zoom-[0.8]" />
     </div>
   </div>
