@@ -33,18 +33,18 @@ The app keeps everything on your iPhone first. A copy is stored in Google Fireba
 
 ## Ads
 
-On the free plan the app may show subtle ads, never on the home screen, in health actions or in forms. Before any tracking, iOS asks for your permission. If you say no, no advertising identifier is used. Plus subscribers see no ads.
+On the free plan, with or without an account, the app shows subtle ads, never on the home screen, in health actions, in forms or during the app’s initial setup. The iPhone advertising identifier (IDFA) is used only for ads, and only if you allow it. Other technical device identifiers go to Google to show and measure the ads. Plus subscribers see no ads.
 
 - **Ad network**
   Ads come from Google AdMob. Google handles this data under the [Google Privacy Policy](https://policies.google.com/privacy) and explains [how it uses information from apps that use its services](https://policies.google.com/technologies/partner-sites).
 - **What goes to Google**
-  Device identifiers and your interactions with ads, such as seeing or tapping one. We never send your pets’ data or any health data.
+  Technical device identifiers, to show and measure the ads, and your interactions with them, such as seeing or tapping one. We never send your pets’ data or any health data.
 - **iPhone advertising identifier (IDFA)**
-  Used only if you allow it in the iOS tracking prompt.
+  Used only for ads, and only if you allow it in the iOS tracking prompt.
 - **Consent notice**
-  After the app’s initial setup, the first time an ad is about to show, the app shows Google’s consent notice, under Brazil’s LGPD, and Apple’s tracking prompt.
+  After the app’s initial setup, the first time an ad is about to show, the app shows Apple’s tracking prompt and, when the law in your country requires it, Google’s consent notice.
 - **Changing your choice**
-  Tracking: in iPhone Settings, under Privacy & Security › Tracking › Pawta. Consent: anytime, in the app’s Settings.
+  Tracking: in iPhone Settings, under Privacy & Security › Tracking › Pawta. Consent: anytime, in the app, under Settings › Ad privacy.
 
 ## Who we share it with
 

@@ -33,18 +33,18 @@ O app guarda tudo primeiro no seu iPhone. Uma cópia fica no Google Firebase (Cl
 
 ## Anúncios
 
-No plano grátis o app pode mostrar anúncios discretos, nunca na tela inicial, em ações de saúde ou em formulários. Antes de qualquer rastreamento, o iOS pede a sua permissão. Se você não permitir, nenhum identificador de publicidade é usado. Quem assina o Plus não vê anúncios.
+No plano grátis, com ou sem conta, o app tem anúncios discretos, nunca na tela inicial, em ações de saúde, em formulários nem na configuração inicial do app. O identificador de publicidade do iPhone (IDFA) só é usado pelos anúncios, e só se você permitir. Outros identificadores técnicos do aparelho vão para o Google para mostrar e medir os anúncios. Quem assina o Plus não vê anúncios.
 
 - **Rede de anúncios**
   Os anúncios vêm do Google AdMob. O Google trata esses dados conforme a [Política de Privacidade do Google](https://policies.google.com/privacy?hl=pt-BR) e explica [como usa as informações dos apps que usam os serviços dele](https://policies.google.com/technologies/partner-sites?hl=pt-BR).
 - **O que vai para o Google**
-  Identificadores do aparelho e as suas interações com os anúncios, como ver ou tocar num anúncio. Nunca enviamos dados dos seus pets nem de saúde.
-- **Identificador de anúncios do iPhone (IDFA)**
-  Só é usado se você permitir no aviso de rastreamento do iOS.
+  Identificadores técnicos do aparelho, para mostrar e medir os anúncios, e as suas interações com eles, como ver ou tocar num anúncio. Nunca enviamos dados dos seus pets nem de saúde.
+- **Identificador de publicidade do iPhone (IDFA)**
+  Só é usado pelos anúncios, e só se você permitir no aviso de rastreamento do iOS.
 - **Aviso de consentimento**
-  Depois da configuração inicial do app, na primeira vez que um anúncio vai aparecer, o app mostra o aviso de consentimento do Google, pela LGPD, e o aviso de rastreamento da Apple.
+  Depois da configuração inicial do app, na primeira vez que um anúncio vai aparecer, o app mostra o aviso de rastreamento da Apple e, quando a lei do seu país exigir, o aviso de consentimento do Google.
 - **Mudar a sua escolha**
-  Rastreamento: nos Ajustes do iPhone, em Privacidade e Segurança › Rastreamento › Pawta. Consentimento: a qualquer momento, nos Ajustes do app.
+  Rastreamento: nos Ajustes do iPhone, em Privacidade e Segurança › Rastreamento › Pawta. Consentimento: a qualquer momento, no app, em Ajustes › Privacidade dos anúncios.
 
 ## Com quem compartilhamos
 
