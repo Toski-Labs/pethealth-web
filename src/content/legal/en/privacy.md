@@ -10,7 +10,7 @@ Toski Labs is the app lab behind Pawta and is responsible for the data described
 
 ## What we collect
 
-Only what the app needs to work:
+Only what the app needs to work and, on the free plan, to show ads:
 
 - **Account**
   The name and email Apple or Google share when you sign in. If you hide your email with Apple, we only get a relay address.
@@ -20,10 +20,12 @@ Only what the app needs to work:
   Your plan status, as reported by Apple. We never receive your card details.
 - **Diagnostics**
   Crash reports (Firebase Crashlytics) and usage statistics without an advertising identifier (Google Analytics for Firebase).
+- **Ads**
+  Free plan only. The Google AdMob SDK collects technical device identifiers, your interactions with ads and, if you allow it, the iPhone advertising identifier (IDFA). Details are in the Ads section.
 
 ## How we use it
 
-To store and sync your data across devices, send the reminders you set up, unlock your plan’s features, fix crashes and answer you when you ask for help.
+To store and sync your data across devices, send the reminders you set up, unlock your plan’s features, fix crashes, answer you when you ask for help and, on the free plan, show ads.
 
 We don’t sell your data, and we don’t use your pets’ information for advertising.
 
@@ -48,16 +50,16 @@ On the free plan, with or without an account, the app shows subtle ads, never on
 
 ## Who we share it with
 
-Only the services that make the app work:
+The services that make the app work and, on the free plan, our advertising partner:
 
 - **Google (Firebase)**
   Sign-in, database, crash reports and statistics.
 - **Apple**
   Sign in with Apple, purchases and subscriptions.
-- **Ad network**
-  Google AdMob, free plan only. Details are in the Ads section above.
 - **Your calendar**
   If you turn on export (Plus), events go to the iPhone Calendar or Google Calendar you connected.
+- **Google AdMob (advertising partner)**
+  Free plan only, to show and measure ads. It isn’t needed for the app to work. Details are in the Ads section above.
 
 ## How long we keep it
 

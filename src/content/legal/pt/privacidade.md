@@ -10,7 +10,7 @@ A Toski Labs é o laboratório de apps responsável pelo Pawta e pelo tratamento
 
 ## O que coletamos
 
-Só o necessário para o app funcionar:
+Só o necessário para o app funcionar e, no plano grátis, para mostrar anúncios:
 
 - **Conta**
   Nome e e-mail que a Apple ou o Google compartilham quando você entra. Se você ocultar o e-mail na Apple, recebemos só um endereço de encaminhamento.
@@ -20,10 +20,12 @@ Só o necessário para o app funcionar:
   O status do seu plano, informado pela Apple. Nunca recebemos os dados do seu cartão.
 - **Diagnóstico**
   Relatórios de falha (Firebase Crashlytics) e estatísticas de uso sem identificador de publicidade (Google Analytics for Firebase).
+- **Anúncios**
+  Só no plano grátis. O SDK do Google AdMob coleta identificadores técnicos do aparelho, as suas interações com os anúncios e, se você permitir, o identificador de publicidade do iPhone (IDFA). Os detalhes estão na seção Anúncios.
 
 ## Para que usamos
 
-Para guardar e sincronizar seus dados entre aparelhos, enviar os lembretes que você criou, liberar os recursos do seu plano, corrigir falhas e responder quando você pede ajuda.
+Para guardar e sincronizar seus dados entre aparelhos, enviar os lembretes que você criou, liberar os recursos do seu plano, corrigir falhas, responder quando você pede ajuda e, no plano grátis, mostrar anúncios.
 
 Não vendemos seus dados e não usamos as informações dos seus pets para publicidade.
 
@@ -48,16 +50,16 @@ No plano grátis, com ou sem conta, o app tem anúncios discretos, nunca na tela
 
 ## Com quem compartilhamos
 
-Só com os serviços que fazem o app funcionar:
+Com os serviços que fazem o app funcionar e, no plano grátis, com o nosso parceiro de anúncios:
 
 - **Google (Firebase)**
   Login, banco de dados, relatórios de falha e estatísticas.
 - **Apple**
   Login com a Apple, compras e assinaturas.
-- **Rede de anúncios**
-  Google AdMob, só no plano grátis. Os detalhes estão na seção Anúncios, acima.
 - **Seu calendário**
   Se você ligar a exportação (Plus), os eventos vão para o Calendário do iPhone ou o Google Agenda que você conectou.
+- **Google AdMob (parceiro de anúncios)**
+  Só no plano grátis, para mostrar e medir os anúncios. Não é necessário para o app funcionar. Os detalhes estão na seção Anúncios, acima.
 
 ## Por quanto tempo
 
