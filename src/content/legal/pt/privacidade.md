@@ -1,7 +1,7 @@
 ---
 title: Política de Privacidade
 lead: Seus dados e os dos seus pets são seus. Aqui está, sem juridiquês, o que o Pawta guarda, por quê e o que você pode fazer.
-updated: "24 de outubro de 2026"
+updated: "28 de outubro de 2026"
 ---
 
 ## Quem somos
@@ -10,7 +10,7 @@ A Toski Labs é o laboratório de apps responsável pelo Pawta e pelo tratamento
 
 ## O que coletamos
 
-Só o necessário para o app funcionar:
+Só o necessário para o app funcionar e, no plano grátis, para mostrar anúncios:
 
 - **Conta**
   Nome e e-mail que a Apple ou o Google compartilham quando você entra. Se você ocultar o e-mail na Apple, recebemos só um endereço de encaminhamento.
@@ -20,10 +20,12 @@ Só o necessário para o app funcionar:
   O status do seu plano, informado pela Apple. Nunca recebemos os dados do seu cartão.
 - **Diagnóstico**
   Relatórios de falha (Firebase Crashlytics) e estatísticas de uso sem identificador de publicidade (Google Analytics for Firebase).
+- **Anúncios**
+  Só no plano grátis. O SDK do Google AdMob coleta identificadores técnicos do aparelho, as suas interações com os anúncios e, se você permitir, o identificador de publicidade do iPhone (IDFA). Os detalhes estão na seção Anúncios.
 
 ## Para que usamos
 
-Para guardar e sincronizar seus dados entre aparelhos, enviar os lembretes que você criou, liberar os recursos do seu plano, corrigir falhas e responder quando você pede ajuda.
+Para guardar e sincronizar seus dados entre aparelhos, enviar os lembretes que você criou, liberar os recursos do seu plano, corrigir falhas, responder quando você pede ajuda e, no plano grátis, mostrar anúncios.
 
 Não vendemos seus dados e não usamos as informações dos seus pets para publicidade.
 
@@ -33,20 +35,31 @@ O app guarda tudo primeiro no seu iPhone. Uma cópia fica no Google Firebase (Cl
 
 ## Anúncios
 
-No plano grátis o app pode mostrar anúncios discretos, nunca na tela inicial, em ações de saúde ou em formulários. Antes de qualquer rastreamento, o iOS pede a sua permissão. Se você não permitir, nenhum identificador de publicidade é usado. Quem assina o Plus não vê anúncios.
+No plano grátis, com ou sem conta, o app tem anúncios discretos, nunca na tela inicial, em ações de saúde, em formulários nem na configuração inicial do app. O identificador de publicidade do iPhone (IDFA) só é usado pelos anúncios, e só se você permitir. Outros identificadores técnicos do aparelho vão para o Google para mostrar e medir os anúncios. Quem assina o Plus não vê anúncios.
+
+- **Rede de anúncios**
+  Os anúncios vêm do Google AdMob. O Google trata esses dados conforme a [Política de Privacidade do Google](https://policies.google.com/privacy?hl=pt-BR) e explica [como usa as informações dos apps que usam os serviços dele](https://policies.google.com/technologies/partner-sites?hl=pt-BR).
+- **O que vai para o Google**
+  Identificadores técnicos do aparelho, para mostrar e medir os anúncios, e as suas interações com eles, como ver ou tocar num anúncio. Nunca enviamos dados dos seus pets nem de saúde.
+- **Identificador de publicidade do iPhone (IDFA)**
+  Só é usado pelos anúncios, e só se você permitir no aviso de rastreamento do iOS.
+- **Aviso de consentimento**
+  Depois da configuração inicial do app, na primeira vez que um anúncio vai aparecer, o app mostra o aviso de rastreamento da Apple e, quando a lei do seu país exigir, o aviso de consentimento do Google.
+- **Mudar a sua escolha**
+  Rastreamento: nos Ajustes do iPhone, em Privacidade e Segurança › Rastreamento › Pawta. Consentimento: a qualquer momento, no app, em Ajustes › Privacidade dos anúncios.
 
 ## Com quem compartilhamos
 
-Só com os serviços que fazem o app funcionar:
+Com os serviços que fazem o app funcionar e, no plano grátis, com o nosso parceiro de anúncios:
 
 - **Google (Firebase)**
   Login, banco de dados, relatórios de falha e estatísticas.
 - **Apple**
   Login com a Apple, compras e assinaturas.
-- **Rede de anúncios**
-  Só no plano grátis. Os anúncios ainda não estão ativos: o nome da empresa vai aparecer aqui antes de eles começarem.
 - **Seu calendário**
   Se você ligar a exportação (Plus), os eventos vão para o Calendário do iPhone ou o Google Agenda que você conectou.
+- **Google AdMob (parceiro de anúncios)**
+  Só no plano grátis, para mostrar e medir os anúncios. Não é necessário para o app funcionar. Os detalhes estão na seção Anúncios, acima.
 
 ## Por quanto tempo
 
