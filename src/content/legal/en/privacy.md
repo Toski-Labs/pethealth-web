@@ -1,7 +1,7 @@
 ---
 title: Privacy Policy
 lead: Your data and your pets’ data belong to you. Here’s what Pawta keeps, why, and what you can do about it, in plain words.
-updated: "October 24, 2026"
+updated: "October 28, 2026"
 ---
 
 ## Who we are
@@ -35,6 +35,17 @@ The app keeps everything on your iPhone first. A copy is stored in Google Fireba
 
 On the free plan the app may show subtle ads, never on the home screen, in health actions or in forms. Before any tracking, iOS asks for your permission. If you say no, no advertising identifier is used. Plus subscribers see no ads.
 
+- **Ad network**
+  Ads come from Google AdMob. Google handles this data under the [Google Privacy Policy](https://policies.google.com/privacy) and explains [how it uses information from apps that use its services](https://policies.google.com/technologies/partner-sites).
+- **What goes to Google**
+  Device identifiers and your interactions with ads, such as seeing or tapping one. We never send your pets’ data or any health data.
+- **iPhone advertising identifier (IDFA)**
+  Used only if you allow it in the iOS tracking prompt.
+- **Consent notice**
+  After the app’s initial setup, the first time an ad is about to show, the app shows Google’s consent notice, under Brazil’s LGPD, and Apple’s tracking prompt.
+- **Changing your choice**
+  Tracking: in iPhone Settings, under Privacy & Security › Tracking › Pawta. Consent: anytime, in the app’s Settings.
+
 ## Who we share it with
 
 Only the services that make the app work:
@@ -44,7 +55,7 @@ Only the services that make the app work:
 - **Apple**
   Sign in with Apple, purchases and subscriptions.
 - **Ad network**
-  Free plan only. Ads aren’t on yet: the company’s name will be listed here before they start.
+  Google AdMob, free plan only. Details are in the Ads section above.
 - **Your calendar**
   If you turn on export (Plus), events go to the iPhone Calendar or Google Calendar you connected.
 

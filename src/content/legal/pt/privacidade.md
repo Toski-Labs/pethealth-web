@@ -1,7 +1,7 @@
 ---
 title: Política de Privacidade
 lead: Seus dados e os dos seus pets são seus. Aqui está, sem juridiquês, o que o Pawta guarda, por quê e o que você pode fazer.
-updated: "24 de outubro de 2026"
+updated: "28 de outubro de 2026"
 ---
 
 ## Quem somos
@@ -35,6 +35,17 @@ O app guarda tudo primeiro no seu iPhone. Uma cópia fica no Google Firebase (Cl
 
 No plano grátis o app pode mostrar anúncios discretos, nunca na tela inicial, em ações de saúde ou em formulários. Antes de qualquer rastreamento, o iOS pede a sua permissão. Se você não permitir, nenhum identificador de publicidade é usado. Quem assina o Plus não vê anúncios.
 
+- **Rede de anúncios**
+  Os anúncios vêm do Google AdMob. O Google trata esses dados conforme a [Política de Privacidade do Google](https://policies.google.com/privacy?hl=pt-BR) e explica [como usa as informações dos apps que usam os serviços dele](https://policies.google.com/technologies/partner-sites?hl=pt-BR).
+- **O que vai para o Google**
+  Identificadores do aparelho e as suas interações com os anúncios, como ver ou tocar num anúncio. Nunca enviamos dados dos seus pets nem de saúde.
+- **Identificador de anúncios do iPhone (IDFA)**
+  Só é usado se você permitir no aviso de rastreamento do iOS.
+- **Aviso de consentimento**
+  Depois da configuração inicial do app, na primeira vez que um anúncio vai aparecer, o app mostra o aviso de consentimento do Google, pela LGPD, e o aviso de rastreamento da Apple.
+- **Mudar a sua escolha**
+  Rastreamento: nos Ajustes do iPhone, em Privacidade e Segurança › Rastreamento › Pawta. Consentimento: a qualquer momento, nos Ajustes do app.
+
 ## Com quem compartilhamos
 
 Só com os serviços que fazem o app funcionar:
@@ -44,7 +55,7 @@ Só com os serviços que fazem o app funcionar:
 - **Apple**
   Login com a Apple, compras e assinaturas.
 - **Rede de anúncios**
-  Só no plano grátis. Os anúncios ainda não estão ativos: o nome da empresa vai aparecer aqui antes de eles começarem.
+  Google AdMob, só no plano grátis. Os detalhes estão na seção Anúncios, acima.
 - **Seu calendário**
   Se você ligar a exportação (Plus), os eventos vão para o Calendário do iPhone ou o Google Agenda que você conectou.
 
