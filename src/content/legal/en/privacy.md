@@ -108,7 +108,13 @@ The Pawta website (pawta.toski-labs.com.br) has no sign-in and uses no cookies, 
 
 ## Children
 
-Pawta is made for adults who look after pets. It isn’t directed at children, and we don’t knowingly collect data from anyone under 13. If you think a child has created an account, email [toskilabs@gmail.com](mailto:toskilabs@gmail.com) and we’ll delete the data.
+Pawta is made for adults who look after pets.
+
+**In Brazil**, the app is for adults 18 or older only. It isn’t directed at children or adolescents, the two groups protected by Brazil’s Digital Statute of Children and Adolescents (ECA Digital, Law No. 15,211/2025), and we don’t knowingly collect data from anyone under 18.
+
+**In the United States**, the app isn’t directed at children under 13, and we don’t knowingly collect their data, as COPPA requires. For now, version 1.0 is available only in Brazil.
+
+The app doesn’t check the age of the people who use it. If you’re a parent or guardian and think a minor has used Pawta, email [toskilabs@gmail.com](mailto:toskilabs@gmail.com) and we’ll delete the data.
 
 ## Changes to this policy
 
