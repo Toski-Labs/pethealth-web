@@ -1,7 +1,7 @@
 ---
 title: Privacy Policy
 lead: Your data and your pets’ data belong to you. Here’s what Pawta keeps, why, and what you can do about it, in plain words.
-updated: "October 28, 2026"
+updated: "November 23, 2026"
 ---
 
 ## Who we are
@@ -14,12 +14,16 @@ Only what the app needs to work and, on the free plan, to show ads:
 
 - **Account**
   The name and email Apple or Google share when you sign in. If you hide your email with Apple, we only get a relay address.
+- **Your contacts**
+  The contacts you add, such as your vet, clinic or pet shop: name, type, phone and address. They belong to your account and apply to all your pets.
 - **Your pets**
-  What you enter: name, species, breed, birth date, weight, vaccines, medicines, vet visits, reminders and contacts.
+  What you enter: name, species, breed, birth date, weight, vaccines, medicines, vet visits and reminders.
 - **Subscription**
   Your plan status, as reported by Apple. We never receive your card details.
 - **Diagnostics**
-  Crash reports (Firebase Crashlytics) and usage statistics without an advertising identifier (Google Analytics for Firebase).
+  Crash reports (Firebase Crashlytics) and usage statistics without an advertising identifier (Google Analytics for Firebase). The statistics show how the app is used: screens and actions, your plan and summaries of your pets, such as how many you have and which species. They don’t include names or anything you write. You can turn them off, see Usage statistics, below.
+- **Free trial**
+  When a Plus free trial starts, the app keeps a mark in the iPhone Keychain with just two things: which trial was used and the day it started. It has no name, email or account, never leaves the device and doesn’t go to iCloud. It keeps the same iPhone from getting the trial again after deleting and reinstalling the app.
 - **Ads**
   Free plan only. The Google AdMob SDK collects technical device identifiers, your interactions with ads and, if you allow it, the iPhone advertising identifier (IDFA). Details are in the Ads section.
 
@@ -28,6 +32,23 @@ Only what the app needs to work and, on the free plan, to show ads:
 To store and sync your data across devices, send the reminders you set up, unlock your plan’s features, fix crashes, answer you when you ask for help and, on the free plan, show ads.
 
 We don’t sell your data, and we don’t use your pets’ information for advertising.
+
+## Usage statistics
+
+Usage statistics (Google Analytics for Firebase) help us understand which parts of the app work and which need improving.
+
+- **On by default**
+  You can turn them off at any time in the app, under Settings › Data and privacy › Usage statistics. Collection stops right away.
+- **Only the statistics**
+  Turning them off doesn’t change crash reports (Firebase Crashlytics), which keep running so we can fix crashes, or the ads on the free plan, which have their own choice.
+- **Per device**
+  The choice is stored on the iPhone, with or without an account, and doesn’t carry over to your other devices.
+
+## Sales and pricing tests
+
+Pawta tests different ways of offering Plus. With Firebase Remote Config and Firebase A/B Testing (Google), each new install of the app is randomly assigned to a group, which may change how Plus is offered, the free plan’s limits or the price tier. The assignment uses the installation identifier Firebase creates, with no link to your name or email.
+
+The group is stored on the iPhone and sent with the usage statistics, so we can compare groups. Deleting the app deletes the group: a new install is assigned again. If you already subscribe, you keep the plan you bought.
 
 ## Where your data lives
 
@@ -53,7 +74,7 @@ On the free plan, with or without an account, the app shows subtle ads, never on
 The services that make the app work and, on the free plan, our advertising partner:
 
 - **Google (Firebase)**
-  Sign-in, database, crash reports and statistics.
+  Sign-in, database, crash reports, usage statistics and remote configuration (Remote Config and A/B Testing).
 - **Apple**
   Sign in with Apple, purchases and subscriptions.
 - **Your calendar**
@@ -63,7 +84,7 @@ The services that make the app work and, on the free plan, our advertising partn
 
 ## How long we keep it
 
-We keep your data while your account exists. Items you delete are permanently removed within 30 days. When you delete your account, we erase everything within 30 days.
+We keep your data while your account exists. Items you delete are permanently removed within 30 days. When you delete your account, we erase everything within 30 days. The free trial mark stays only on the iPhone, without identifying you, and remains there after you delete your account or the app, so the trial isn’t repeated.
 
 ## Your rights
 

@@ -1,7 +1,7 @@
 ---
 title: Política de Privacidade
 lead: Seus dados e os dos seus pets são seus. Aqui está, sem juridiquês, o que o Pawta guarda, por quê e o que você pode fazer.
-updated: "28 de outubro de 2026"
+updated: "23 de novembro de 2026"
 ---
 
 ## Quem somos
@@ -14,12 +14,16 @@ Só o necessário para o app funcionar e, no plano grátis, para mostrar anúnci
 
 - **Conta**
   Nome e e-mail que a Apple ou o Google compartilham quando você entra. Se você ocultar o e-mail na Apple, recebemos só um endereço de encaminhamento.
+- **Seus contatos**
+  Os contatos que você cadastra, como o veterinário, a clínica ou o pet shop: nome, tipo, telefone e endereço. Eles ficam na sua conta e valem para todos os seus pets.
 - **Seus pets**
-  O que você cadastra: nome, espécie, raça, nascimento, peso, vacinas, remédios, consultas, lembretes e contatos.
+  O que você cadastra: nome, espécie, raça, nascimento, peso, vacinas, remédios, consultas e lembretes.
 - **Assinatura**
   O status do seu plano, informado pela Apple. Nunca recebemos os dados do seu cartão.
 - **Diagnóstico**
-  Relatórios de falha (Firebase Crashlytics) e estatísticas de uso sem identificador de publicidade (Google Analytics for Firebase).
+  Relatórios de falha (Firebase Crashlytics) e estatísticas de uso sem identificador de publicidade (Google Analytics for Firebase). As estatísticas mostram como o app é usado: as telas e as ações, o seu plano e resumos dos seus pets, como quantos são e de que espécies. Não levam nomes nem o que você escreve. Você pode desligá-las, veja Estatísticas de uso, abaixo.
+- **Teste grátis**
+  Quando um teste grátis do Plus começa, o app guarda no Keychain do iPhone uma marca com só duas informações: qual teste foi usado e o dia em que começou. Ela não tem nome, e-mail nem conta, não sai do aparelho e não vai para o iCloud. Serve para o mesmo iPhone não ganhar o teste de novo depois de apagar e instalar o app.
 - **Anúncios**
   Só no plano grátis. O SDK do Google AdMob coleta identificadores técnicos do aparelho, as suas interações com os anúncios e, se você permitir, o identificador de publicidade do iPhone (IDFA). Os detalhes estão na seção Anúncios.
 
@@ -28,6 +32,23 @@ Só o necessário para o app funcionar e, no plano grátis, para mostrar anúnci
 Para guardar e sincronizar seus dados entre aparelhos, enviar os lembretes que você criou, liberar os recursos do seu plano, corrigir falhas, responder quando você pede ajuda e, no plano grátis, mostrar anúncios.
 
 Não vendemos seus dados e não usamos as informações dos seus pets para publicidade.
+
+## Estatísticas de uso
+
+As estatísticas de uso (Google Analytics for Firebase) nos ajudam a entender quais partes do app funcionam e quais precisam melhorar.
+
+- **Ligadas por padrão**
+  Você pode desligá-las a qualquer momento no app, em Ajustes › Dados e privacidade › Estatísticas de uso. A coleta para na hora.
+- **Só as estatísticas**
+  Desligar não muda os relatórios de falha (Firebase Crashlytics), que continuam para corrigirmos travamentos, nem os anúncios do plano grátis, que têm a própria escolha.
+- **Vale para este aparelho**
+  A escolha fica guardada no iPhone, com ou sem conta, e não passa para os seus outros aparelhos.
+
+## Testes de venda e de preço
+
+O Pawta testa jeitos diferentes de oferecer o Plus. Com o Firebase Remote Config e o Firebase A/B Testing (Google), cada instalação nova do app é sorteada para um grupo, que pode mudar a forma de venda do Plus, os limites do plano grátis ou a faixa de preço. O sorteio usa o identificador da instalação criado pelo Firebase, sem ligação com o seu nome ou e-mail.
+
+O grupo fica guardado no iPhone e vai para as estatísticas de uso, para compararmos os grupos. Apagar o app apaga o grupo: uma nova instalação é sorteada de novo. Quem já assina continua com o plano que comprou.
 
 ## Onde seus dados ficam
 
@@ -53,7 +74,7 @@ No plano grátis, com ou sem conta, o app tem anúncios discretos, nunca na tela
 Com os serviços que fazem o app funcionar e, no plano grátis, com o nosso parceiro de anúncios:
 
 - **Google (Firebase)**
-  Login, banco de dados, relatórios de falha e estatísticas.
+  Login, banco de dados, relatórios de falha, estatísticas de uso e configurações remotas (Remote Config e A/B Testing).
 - **Apple**
   Login com a Apple, compras e assinaturas.
 - **Seu calendário**
@@ -63,7 +84,7 @@ Com os serviços que fazem o app funcionar e, no plano grátis, com o nosso parc
 
 ## Por quanto tempo
 
-Guardamos seus dados enquanto sua conta existir. Itens que você apaga são removidos de vez em até 30 dias. Ao excluir a conta, apagamos tudo em até 30 dias.
+Guardamos seus dados enquanto sua conta existir. Itens que você apaga são removidos de vez em até 30 dias. Ao excluir a conta, apagamos tudo em até 30 dias. A marca do teste grátis fica só no iPhone, sem identificar você, e continua lá depois de excluir a conta ou apagar o app, para o teste não se repetir.
 
 ## Seus direitos
 
