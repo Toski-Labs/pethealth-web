@@ -108,7 +108,13 @@ O site do Pawta (pawta.toski-labs.com.br) não tem login, não usa cookies e nã
 
 ## Crianças
 
-O Pawta é feito para adultos que cuidam de pets. Ele não é direcionado a crianças e não coletamos de propósito dados de menores de 13 anos. Se você acha que uma criança criou uma conta, escreva para [toskilabs@gmail.com](mailto:toskilabs@gmail.com) e apagamos os dados.
+O Pawta é feito para adultos que cuidam de pets.
+
+**No Brasil**, o app é só para maiores de 18 anos. Ele não é direcionado a crianças nem a adolescentes, os dois grupos que o Estatuto Digital da Criança e do Adolescente (ECA Digital, Lei nº 15.211/2025) protege, e não coletamos de propósito dados de menores de 18 anos.
+
+**Nos Estados Unidos**, o app não é direcionado a menores de 13 anos, e não coletamos de propósito dados deles, como pede a COPPA. Por enquanto, a versão 1.0 está disponível só no Brasil.
+
+O app não confere a idade de quem o usa. Se você é mãe, pai ou responsável e acha que um menor usou o Pawta, escreva para [toskilabs@gmail.com](mailto:toskilabs@gmail.com) e apagamos os dados.
 
 ## Mudanças nesta política
 
